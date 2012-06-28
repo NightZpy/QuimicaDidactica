@@ -6,7 +6,8 @@ Created on 01/02/2012
 import config
 
 from pygame.sprite import Sprite
-from graficos import cargarImagen
+from graphics import load_image
+import pygame
 
 class Buttom(Sprite):
     '''
@@ -14,14 +15,16 @@ class Buttom(Sprite):
     ''' 
 
 
-    def __init__(self, x, y, visible = False):
+    def __init__(self, x, y, img_pressed_path, img_release_path, visible = False):
         '''
         Constructor
         '''
         Sprite.__init__(self)
-        self.pressedImg = cargarImagen(config.menus+"btnPressed.png", True, (0,0))
+        self.pressedImg = load_image(config.buttoms_png+img_pressed_path, True, (0,0))
+        self.pressedImg = pygame.transform.scale(self.pressedImg, (270, 140))
         self.pressedRect = self.pressedImg.get_rect() 
-        self.released = cargarImagen(config.menus+"btnReleased.png", True, (0,0))
+        self.released = load_image(config.buttoms_png+img_release_path, True, (0,0))
+        self.released = pygame.transform.scale(self.released, (270, 140))
         self.releasedRect = self.released.get_rect()
         self.pressedRect.centerx = x
         self.pressedRect.centery = y

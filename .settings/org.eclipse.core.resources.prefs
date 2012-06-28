@@ -1,4 +1,6 @@
-#Tue Jun 26 17:48:01 VET 2012
+#Tue Jun 26 18:49:07 VET 2012
 eclipse.preferences.version=1
 encoding//src/config.py=utf-8
-encoding//src/graficos.py=utf-8
+encoding//src/director.py=utf-8
+encoding//src/graphics.py=utf-8
+encoding//src/scene.py=utf-8

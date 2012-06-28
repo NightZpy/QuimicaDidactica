@@ -7,6 +7,7 @@
 
 import sys
 import pygame
+import config
 
 # ---------------------------------------------------------------------
 # Constantes
@@ -28,40 +29,41 @@ class Director:
     derivados de Scene."""
 
     def __init__(self):
-        self.pantalla = pygame.display.set_mode((640, 480))
-        self.pantalla = pygame.display.set_caption("Plantilla Escenas")
-        self.escena = None
-        self.isSalir = False
-        self.reloj = pygame.time.Clock()
+        self.screen = pygame.display.set_mode((config.width, config.hight))
+        pygame.display.set_caption(config.NAME)
+        print "Screen: "+str(self.screen)
+        self.scene = None
+        self.go_away = False
+        self.time_keeper = pygame.time.Clock()
 
-    def bucle(self):
+    def loop(self):
         "Inicia el juego: Loop/Ciclo/Bucle principal"
-        while not self.isSalir:
-            tiempo = self.reloj.tick(60)
+        while not self.go_away:
+            self.time = self.time_keeper.tick(60)
             #Eventos de salida
-            for evento in pygame.event.get():
-                if evento.type == pygame.QUIT:
-                    self.salir()
-                if evento.type == pygame.KEYDOWN:
-                    if evento.key  == pygame.K_ESCAPE:
-                        self.salir()
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    self.exit()
+                if event.type == pygame.KEYDOWN:
+                    if event.key  == pygame.K_ESCAPE:
+                        self.exit()
 
             #Detecta los eventos
-            self.escena.onEvent()
+            self.scene.on_event()
 
-            #Actualiza la escena
-            self.escena.onUpdate()
+            #Actualiza la scene
+            self.scene.on_update()
 
-            #Dibuja en pantalla
-            self.escena.onDraw(self.pantalla)
+            #Dibuja en screen
+            self.scene.on_draw(self.screen)
             pygame.display.flip()
 
-    def cambiarEscena(self, escena):
-        "Altera la escena actual."
-        self.escena = escena
+    def change_scene(self, escena):
+        "Altera la scene actual."
+        self.scene = escena
 
-    def salir(self):
-        self.isSalir = True
+    def exit(self):
+        self.go_away = True
 
 # ---------------------------------------------------------------------
 # Funciones

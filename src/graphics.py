@@ -7,7 +7,7 @@ import pygame
 import config
 
 # Carga una imagen, la trasnparencia para la imagen y el color de la transparencia son opcionales
-def cargarImagen(filename, transparent=False, pixel=(0,0)):
+def load_image(filename, transparent=False, pixel=(0,0)):
     "Convertimos la imagen al fomrato interno de Pygame"
     try: image = pygame.image.load(filename)
     except pygame.error, message:
@@ -18,7 +18,7 @@ def cargarImagen(filename, transparent=False, pixel=(0,0)):
             image.set_colorkey(color, pygame.RLEACCEL)
     return image
 
-def textoAImagen(texto, posx, posy, color=(0, 0, 0), tam=15):
+def string_to_image(texto, posx, posy, color=(0, 0, 0), tam=15):
     "Convierte un texto a una imagen que será dibujada."
     fuente = pygame.font.Font(config.fuentes + "DroidSans.ttf", tam)
     salida = pygame.font.Font.render(fuente, texto, 1, color)

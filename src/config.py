@@ -3,20 +3,19 @@
 """ Configuracion general del proyecto """
 
 # Nombre
-NOMBRE = "Química Didáctica"
+NAME = "Química Didáctica"
 GAME_OVER = 0
 NEXT_SCENE = 1
 
 # Resoluci�n
-ancho = 640
-alto = 480
-anchoPanel = 155
+width = 800
+hight = 600
 
 # Directorios
-sprites = "datos/graficos/sprites/"
-fondos = "datos/graficos/fondos/"
-menus = "datos/graficos/menus/"
-fuentes = "datos/fuentes/"
-musica = "datos/audio/musica/"
-sonidos = "datos/audio/sonidos/"
-niveles = "niveles/"
+sprites = "resources/images/sprites/"
+backgrounds = "resources/images/backgrounds/"
+buttoms_png = "resources/images/buttoms/png/"
+titles = "resources/images/titles/"
+menus = "resources/images/menus/"
+fuentes = "resources/fuentes/"
+audios = "resources/audios/"
