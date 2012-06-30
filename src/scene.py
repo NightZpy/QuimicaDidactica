@@ -20,6 +20,15 @@ class Scene:
 
     def __init__(self, director):
         self.director = director
+        self.go_main_menu = False
+        self.go_ahorcado = False
+        self.go_nombrar = False
+        self.go_sopa_letras = False
+        self.go_crucigrama = False
+        self.go_pareo = False
+        self.go_funcion_cotidiana = False
+        self.is_paused = False
+        self.exit = False
 
     def on_update(self):
         "Actualización lógica que se llama automáticamente desde el director."

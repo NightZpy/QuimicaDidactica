@@ -5,7 +5,6 @@
 # Modulos
 # ---------------------------------------------------------------------
 
-import sys
 import pygame
 import config
 
@@ -48,8 +47,8 @@ class Director:
                     if event.key  == pygame.K_ESCAPE:
                         self.exit()
 
-            #Detecta los eventos
-            self.scene.on_event()
+                #Detecta los eventos
+                self.scene.on_event(event)
 
             #Actualiza la scene
             self.scene.on_update()

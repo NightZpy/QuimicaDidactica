@@ -12,7 +12,7 @@ def main():
     director = Director()
     sce_main_menu = Sce_Main_Menu(director)
     director.change_scene(sce_main_menu) 
-    director.loop()
+    go = director.loop()
 
 if __name__ == '__main__':
    pygame.init()

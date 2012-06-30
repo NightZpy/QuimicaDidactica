@@ -8,6 +8,7 @@ import config
 from pygame.sprite import Sprite
 from graphics import load_image
 import pygame
+import time
 
 class Buttom(Sprite):
     '''
@@ -20,36 +21,51 @@ class Buttom(Sprite):
         Constructor
         '''
         Sprite.__init__(self)
-        self.pressedImg = load_image(config.buttoms_png+img_pressed_path, True, (0,0))
-        self.pressedImg = pygame.transform.scale(self.pressedImg, (270, 140))
-        self.pressedRect = self.pressedImg.get_rect() 
-        self.released = load_image(config.buttoms_png+img_release_path, True, (0,0))
-        self.released = pygame.transform.scale(self.released, (270, 140))
-        self.releasedRect = self.released.get_rect()
-        self.pressedRect.centerx = x
-        self.pressedRect.centery = y
-        self.releasedRect.centerx = x
-        self.releasedRect.centery = y
-        self.isPressed = False
+        self.pressed_img = load_image(config.buttoms_png+img_pressed_path, True, (0,0))
+        self.pressed_img = pygame.transform.scale(self.pressed_img, (270, 140))
+        self.pressed_rect = self.pressed_img.get_rect() 
+        self.release_img = load_image(config.buttoms_png+img_release_path, True, (0,0))
+        self.release_img = pygame.transform.scale(self.release_img, (270, 140))
+        self.release_rect = self.release_img.get_rect()
+        self.pressed_rect.centerx = x
+        self.pressed_rect.centery = y
+        self.release_rect.centerx = x
+        self.release_rect.centery = y
+        self.is_pressed = False
+        self.is_over = False
+        self.beep = pygame.mixer.Sound('beep1.ogg')
+
+        self.state = self.release_img
+        self.state_rect = self.release_rect
         
-        self.state = self.released
-        self.stateRect = self.releasedRect
-        
-        self.isVisible = visible
+        self.is_visible = visible
         
     def pressed(self, (x, y)):
-        if (not self.isPressed) and self.pressedRect.collidepoint(x, y): self.isPressed = True
-        else: self.isPressed = False
+        if (not self.is_pressed) and self.pressed_rect.collidepoint(x, y): 
+            self.is_pressed = True
+            print "Pressed in pos: "+str((x, y))
+        else: 
+            self.is_pressed = False
         
+    def mouse_over(self, (x, y)): 
+        if (not self.is_pressed) and self.pressed_rect.collidepoint(x, y): self.is_over = True
+        else: self.is_over = False
+    
     def actualizar(self):
-        if self.isPressed: 
-            self.state = self.pressedImg
-            self.stateRect = self.pressedRect
+        if self.is_pressed: 
+            #self.beep.play()
+            #time.sleep(1)
+            #self.beep.stop()
+            self.state = self.pressed_img
+            self.state_rect = self.pressed_rect
+        elif self.is_over:
+            self.state = self.pressed_img
+            self.state_rect = self.pressed_rect
         else:
-            self.state = self.released
-            self.stateRect = self.releasedRect 
+            self.state = self.release_img
+            self.state_rect = self.release_rect 
             
     def dibujar(self, pantalla):
-        if self.isVisible: pantalla.blit(self.state, self.stateRect)
+        if self.is_visible: pantalla.blit(self.state, self.state_rect)
                        
         

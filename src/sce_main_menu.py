@@ -34,18 +34,28 @@ class Sce_Main_Menu(Scene):
     
     def on_update(self):
         self.time = self.director.time   
+        for buttom in self.buttoms:
+            buttom.actualizar()
             
 
-    def on_event(self):
-        keys = pygame.key.get_pressed()
+    def on_event(self, event):
+        """keys = pygame.key.get_pressed()
         if keys[pygame.K_LEFT]:
             print "Tecla: Izquierda"
         if keys[pygame.K_RIGHT]:
             print "Tecla: Derecha"
+        """
         
-        mouse_pressed = pygame.mouse.get_pressed()
-        if mouse_pressed[0]: 
-            print "Click: "+str(pygame.mouse.get_pos())
+        mouse_pos = pygame.mouse.get_pos()
+        for buttom in self.buttoms:
+            buttom.mouse_over(mouse_pos)
+        
+        if event.type == pygame.MOUSEBUTTONUP: 
+            #print "MOUSEBUTTONUP"
+            #mouse_pressed = pygame.mouse.get_pressed()
+            mouse_pos = pygame.mouse.get_pos()
+            for buttom in self.buttoms:
+                buttom.pressed(mouse_pos)
 
     def on_draw(self, screen):
         screen.blit(self.background, (0, 0))
