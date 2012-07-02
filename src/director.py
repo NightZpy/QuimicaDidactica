@@ -53,6 +53,9 @@ class Director:
             #Actualiza la scene
             self.scene.on_update()
 
+            #Verifico si hay un cambio de scena
+            if self.scene.go_scene: return self.scene.go_scene
+            
             #Dibuja en screen
             self.scene.on_draw(self.screen)
             pygame.display.flip()

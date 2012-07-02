@@ -51,7 +51,7 @@ class Buttom(Sprite):
         if (not self.is_pressed) and self.pressed_rect.collidepoint(x, y): self.is_over = True
         else: self.is_over = False
     
-    def actualizar(self):
+    def updater(self):
         if self.is_pressed: 
             #self.beep.play()
             #time.sleep(1)

@@ -1,5 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+from graphics import load_image
+import config
+from config import SMALL, PNG_EXT
 
 # ---------------------------------------------------------------------
 # Modulos
@@ -18,16 +21,10 @@ class Scene:
     Una escena es una parte visible del juego, como una pantalla de presentaci�n o men� de opciones.
     Tiene que crear un objeto derivado de esta clase para crear una escena utilizable."""
 
-    def __init__(self, director):
+    def __init__(self, director, background_name):
         self.director = director
-        self.go_main_menu = False
-        self.go_ahorcado = False
-        self.go_nombrar = False
-        self.go_sopa_letras = False
-        self.go_crucigrama = False
-        self.go_pareo = False
-        self.go_funcion_cotidiana = False
-        self.is_paused = False
+        self.background = load_image(config.backgrounds+background_name+SMALL+PNG_EXT) 
+        self.go_scene = False
         self.exit = False
 
     def on_update(self):

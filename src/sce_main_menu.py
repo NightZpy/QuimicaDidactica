@@ -8,25 +8,27 @@ from graphics import load_image
 import config
 import pygame
 from buttom import Buttom
+from config import PNG_EXT, SMALL, DEFINITIONS_SCENE, COTIDIAN_FUNCTION_SCENE,\
+    SOPA_LETRAS_SCENE, NOMBRAR_SCENE, PAREO_SCENE, CRUCIGRAMA_SCENE
 
 class Sce_Main_Menu(Scene):
     '''
     classdocs
     '''
-    def __init__(self, director):
+    def __init__(self, director, background_name):
         '''
         Constructor
         '''        
-        Scene.__init__(self, director)
-        self.background = load_image(config.backgrounds+"main_menu_small.png")
-        self.buttoms = [
-                        Buttom(200, 100, "buttom_1_pressed.png", "buttom_1_release.png", True), 
-                        Buttom(550, 100, "buttom_2_pressed.png", "buttom_2_release.png", True),  
-                        Buttom(200, 250, "buttom_3_pressed.png", "buttom_3_release.png", True),  
-                        Buttom(550, 250, "buttom_4_pressed.png", "buttom_4_release.png", True), 
-                        Buttom(200, 400, "buttom_5_pressed.png", "buttom_5_release.png", True),  
-                        Buttom(550, 400, "buttom_6_pressed.png", "buttom_6_release.png", True)
-                        ]
+        Scene.__init__(self, director, background_name)
+        
+        self.buttoms = {
+                        DEFINITIONS_SCENE: Buttom(200, 100, "buttom_1_pressed"+PNG_EXT, "buttom_1_release"+PNG_EXT, True), 
+                        COTIDIAN_FUNCTION_SCENE: Buttom(550, 100, "buttom_2_pressed"+PNG_EXT, "buttom_2_release"+PNG_EXT, True),  
+                        SOPA_LETRAS_SCENE: Buttom(200, 250, "buttom_3_pressed"+PNG_EXT, "buttom_3_release"+PNG_EXT, True),  
+                        NOMBRAR_SCENE: Buttom(550, 250, "buttom_4_pressed"+PNG_EXT, "buttom_4_release"+PNG_EXT, True), 
+                        PAREO_SCENE: Buttom(200, 400, "buttom_5_pressed"+PNG_EXT, "buttom_5_release"+PNG_EXT, True),  
+                        CRUCIGRAMA_SCENE: Buttom(550, 400, "buttom_6_pressed"+PNG_EXT, "buttom_6_release"+PNG_EXT, True)
+                        }
         
         
     def locate_buttoms(self):
@@ -34,8 +36,10 @@ class Sce_Main_Menu(Scene):
     
     def on_update(self):
         self.time = self.director.time   
-        for buttom in self.buttoms:
-            buttom.actualizar()
+        for scene, buttom in self.buttoms.iteritems():
+            buttom.updater()
+            if buttom.is_pressed: self.go_scene = scene
+            #else: self.go_scene = False
             
 
     def on_event(self, event):
@@ -47,19 +51,19 @@ class Sce_Main_Menu(Scene):
         """
         
         mouse_pos = pygame.mouse.get_pos()
-        for buttom in self.buttoms:
+        for buttom in self.buttoms.itervalues():
             buttom.mouse_over(mouse_pos)
         
         if event.type == pygame.MOUSEBUTTONUP: 
             #print "MOUSEBUTTONUP"
             #mouse_pressed = pygame.mouse.get_pressed()
             mouse_pos = pygame.mouse.get_pos()
-            for buttom in self.buttoms:
+            for buttom in self.buttoms.itervalues():
                 buttom.pressed(mouse_pos)
 
     def on_draw(self, screen):
         screen.blit(self.background, (0, 0))
-        for buttom in self.buttoms:
+        for buttom in self.buttoms.itervalues():
             buttom.dibujar(screen)
     
     
