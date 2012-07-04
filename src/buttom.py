@@ -22,10 +22,10 @@ class Buttom(Sprite):
         '''
         Sprite.__init__(self)
         self.pressed_img = load_image(config.buttoms_png+img_pressed_path, True, (0,0))
-        self.pressed_img = pygame.transform.scale(self.pressed_img, (270, 140))
+        self.pressed_img = pygame.transform.scale(self.pressed_img, (config.b_width, config.b_heigth))
         self.pressed_rect = self.pressed_img.get_rect() 
         self.release_img = load_image(config.buttoms_png+img_release_path, True, (0,0))
-        self.release_img = pygame.transform.scale(self.release_img, (270, 140))
+        self.release_img = pygame.transform.scale(self.release_img, (config.b_width, config.b_heigth))
         self.release_rect = self.release_img.get_rect()
         self.pressed_rect.centerx = x
         self.pressed_rect.centery = y

@@ -12,10 +12,12 @@ def load_image(filename, transparent=False, pixel=(0,0)):
     try: image = pygame.image.load(filename)
     except pygame.error, message:
             raise SystemExit, message
-    image = image.convert()
+    #image = image.convert()
     if transparent:
-            color = image.get_at(pixel)
-            image.set_colorkey(color, pygame.RLEACCEL)
+            #color = image.get_at(pixel)
+            #image.set_colorkey(color, pygame.SRCALPHA)
+            #image = image.convert()
+            image = image.convert_alpha()
     return image
 
 def string_to_image(texto, posx, posy, color=(0, 0, 0), tam=15):
