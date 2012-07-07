@@ -16,21 +16,19 @@ class Buttom(Sprite):
     ''' 
 
 
-    def __init__(self, x, y, img_pressed_path, img_release_path, visible = False):
+    def __init__(self, (x, y), (width, heigth), img_pressed_path, img_release_path, visible = False):
         '''
         Constructor
         '''
         Sprite.__init__(self)
         self.pressed_img = load_image(config.buttoms_png+img_pressed_path, True, (0,0))
-        self.pressed_img = pygame.transform.scale(self.pressed_img, (config.b_width, config.b_heigth))
+        self.pressed_img = pygame.transform.scale(self.pressed_img, (width, heigth))
         self.pressed_rect = self.pressed_img.get_rect() 
         self.release_img = load_image(config.buttoms_png+img_release_path, True, (0,0))
-        self.release_img = pygame.transform.scale(self.release_img, (config.b_width, config.b_heigth))
+        self.release_img = pygame.transform.scale(self.release_img, (width, heigth))
         self.release_rect = self.release_img.get_rect()
-        self.pressed_rect.centerx = x
-        self.pressed_rect.centery = y
-        self.release_rect.centerx = x
-        self.release_rect.centery = y
+        self.pressed_rect.center = (x, y)
+        self.release_rect.center = (x, y)
         self.is_pressed = False
         self.is_over = False
         self.beep = pygame.mixer.Sound('beep1.ogg')
@@ -39,7 +37,13 @@ class Buttom(Sprite):
         self.state_rect = self.release_rect
         
         self.is_visible = visible
-        
+    
+    def set_size(self, size):
+        self.pressed_img = pygame.transform.scale(self.pressed_img, size)
+        self.release_img = pygame.transform.scale(self.release_img, size)
+        self.pressed_rect = self.pressed_img.get_rect()
+        self.release_rect = self.release_img.get_rect()
+     
     def pressed(self, (x, y)):
         if (not self.is_pressed) and self.pressed_rect.collidepoint(x, y): 
             self.is_pressed = True
@@ -65,7 +69,7 @@ class Buttom(Sprite):
             self.state = self.release_img
             self.state_rect = self.release_rect 
             
-    def dibujar(self, pantalla):
-        if self.is_visible: pantalla.blit(self.state, self.state_rect)
+    def draw(self, screen):
+        if self.is_visible: screen.blit(self.state, self.state_rect)
                        
         

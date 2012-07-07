@@ -20,6 +20,7 @@ CRUCIGRAMA_SCENE = 'main_crucigrama'
 SOPA_LETRAS_SCENE = 'main_sopa'
 COTIDIAN_FUNCTION_SCENE = 'main_cotidian_function'
 DEFINITIONS_SCENE = 'main_definition'
+WINNER_SCENE = 'winner'
 
 # Rect dict constant for grid in cotidian function game
 LTR = 'left_top_rect'
@@ -37,20 +38,29 @@ SMALL = '_small'
 BIG = '_big'
 PNG_EXT = '.png'
 JPG_EXT = '.jpg'
+END = '_end'
+INIT = '_init'
 
 # Resolution
 width = 800
-hight = 600
+height = 600
 
 # main menu button size
-b_width = 270
-b_heigth = 140 
+b_size = (270, 140)
+
+# size main buttons
+main_menu_btn_size = (120, 60)
+exit_btn_size = (120, 60)
 
 # cotidian option size
-c_opt_size = (200, 100)
+c_opt_size = (160, 80)
 
 #init pos for cotidian options
 c_opt_pos = (515, 130)
+
+# exit button pos
+exit_btn_pos = (width - (exit_btn_size[0] * 2.2), height - 50)
+main_menu_btn_pos = ((exit_btn_pos[0] + exit_btn_size[0] + 20), exit_btn_pos[1])
 
 # Directories
 sprites = "resources/images/sprites/"

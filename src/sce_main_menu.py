@@ -20,14 +20,19 @@ class Sce_Main_Menu(Scene):
         Constructor
         '''        
         Scene.__init__(self, director, background_name)
+        self.title_img = load_image(config.titles+'functional_groups'+PNG_EXT, True)
+        self.title_img = pygame.transform.scale(self.title_img, (450, 150))
+        self.title_rect = self.title_img.get_rect()
+        self.title_rect.centerx = config.width / 2
+        self.title_rect.centery = 50
         
         self.buttoms = {
-                        DEFINITIONS_SCENE: Buttom(200, 100, "buttom_1_pressed"+PNG_EXT, "buttom_1_release"+PNG_EXT, True), 
-                        COTIDIAN_FUNCTION_SCENE: Buttom(550, 100, "buttom_2_pressed"+PNG_EXT, "buttom_2_release"+PNG_EXT, True),  
-                        SOPA_LETRAS_SCENE: Buttom(200, 250, "buttom_3_pressed"+PNG_EXT, "buttom_3_release"+PNG_EXT, True),  
-                        NOMBRAR_SCENE: Buttom(550, 250, "buttom_4_pressed"+PNG_EXT, "buttom_4_release"+PNG_EXT, True), 
-                        PAREO_SCENE: Buttom(200, 400, "buttom_5_pressed"+PNG_EXT, "buttom_5_release"+PNG_EXT, True),  
-                        CRUCIGRAMA_SCENE: Buttom(550, 400, "buttom_6_pressed"+PNG_EXT, "buttom_6_release"+PNG_EXT, True)
+                        DEFINITIONS_SCENE: Buttom((200, 200), config.b_size, "buttom_1_pressed"+PNG_EXT, "buttom_1_release"+PNG_EXT, True), 
+                        COTIDIAN_FUNCTION_SCENE: Buttom((550, 200), config.b_size, "buttom_2_pressed"+PNG_EXT, "buttom_2_release"+PNG_EXT, True),  
+                        SOPA_LETRAS_SCENE: Buttom((200, 350), config.b_size, "buttom_3_pressed"+PNG_EXT, "buttom_3_release"+PNG_EXT, True),  
+                        NOMBRAR_SCENE: Buttom((550, 350), config.b_size, "buttom_4_pressed"+PNG_EXT, "buttom_4_release"+PNG_EXT, True), 
+                        PAREO_SCENE: Buttom((200, 500), config.b_size, "buttom_5_pressed"+PNG_EXT, "buttom_5_release"+PNG_EXT, True),  
+                        CRUCIGRAMA_SCENE: Buttom((550, 500), config.b_size, "buttom_6_pressed"+PNG_EXT, "buttom_6_release"+PNG_EXT, True)
                         }
         
         
@@ -43,16 +48,11 @@ class Sce_Main_Menu(Scene):
             
 
     def on_event(self, event):
-        """keys = pygame.key.get_pressed()
-        if keys[pygame.K_LEFT]:
-            print "Tecla: Izquierda"
-        if keys[pygame.K_RIGHT]:
-            print "Tecla: Derecha"
-        """
         
-        mouse_pos = pygame.mouse.get_pos()
-        for buttom in self.buttoms.itervalues():
-            buttom.mouse_over(mouse_pos)
+        if event.type == pygame.MOUSEMOTION:        
+            mouse_pos = pygame.mouse.get_pos()
+            for buttom in self.buttoms.itervalues():
+                buttom.mouse_over(mouse_pos)
         
         if event.type == pygame.MOUSEBUTTONUP: 
             #print "MOUSEBUTTONUP"
@@ -63,8 +63,9 @@ class Sce_Main_Menu(Scene):
 
     def on_draw(self, screen):
         screen.blit(self.background, (0, 0))
+        screen.blit(self.title_img, self.title_rect)
         for buttom in self.buttoms.itervalues():
-            buttom.dibujar(screen)
+            buttom.draw(screen)
     
     
         
