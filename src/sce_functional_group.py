@@ -22,7 +22,6 @@ class Sce_Functional_Group(Scene):
         self.functional_group = Functional_Group()
         self.scene_winner =  Sce_Winner(director, background_name+END, COTIDIAN_FUNCTION_SCENE)   
         
-        self.element_collide = False
         for buttom in self.common_buttoms.itervalues():
             buttom.is_visible = True
                 
@@ -60,7 +59,7 @@ class Sce_Functional_Group(Scene):
             if option.is_pressed:
                 if not option.is_correct:
                     option.move(pygame.mouse.get_pos())
-                    
+                   
         self.is_complete = self.functional_group.check_complete()
                     
     def on_event(self, event):

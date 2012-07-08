@@ -2,6 +2,7 @@
 
 
 """ Configuracion general del proyecto """
+from glob import glob
 
 # Nombre
 NAME = "Química Didáctica"
@@ -13,9 +14,9 @@ PAUSE = 3
 
 #Scenes constant
 MAIN_MENU_SCENE = 'main_menu'
-AHORCADO_SCENE = 'main_ahorcado'
-PAREO_SCENE = 'main_pareo'
-NOMBRAR_SCENE = 'main_nombrar'
+HANGMAN_SCENE = 'main_ahorcado'
+MATCH_SCENE = 'main_match'
+NAME_SCENE = 'main_name'
 CRUCIGRAMA_SCENE = 'main_crucigrama'
 SOPA_LETRAS_SCENE = 'main_sopa'
 COTIDIAN_FUNCTION_SCENE = 'main_cotidian_function'
@@ -28,11 +29,14 @@ RTR = 'right_top_rect'
 LBR = 'left_bottom_rect'
 RBR = 'right_bottom_rect'
 
-# Number of cotidian pairs
-COTIDIAN_PAIRS = 6
+# Items
+TEXT_FIELD = 'text_field'
 
 # Number of problems in every cotidian game
 NUMBER_COTIDIAN_OPTIONS = 2
+
+# Number of problems in every name game
+NUMBER_NAME_OPTIONS = 3
 
 SMALL = '_small'
 BIG = '_big'
@@ -48,6 +52,15 @@ height = 600
 # main menu button size
 b_size = (270, 140)
 
+# title correct size 
+correct_title_size = (300, 130)
+
+# title winner size 
+winner_title_size = (550, 200)
+
+# title winner pos
+winner_title_pos = (width / 2, (height / 2) - 100) 
+
 # size main buttons
 main_menu_btn_size = (120, 60)
 exit_btn_size = (120, 60)
@@ -57,6 +70,24 @@ c_opt_size = (160, 80)
 
 #init pos for cotidian options
 c_opt_pos = (515, 130)
+
+# names exercise size
+name_exercise_size = (300, 300)
+
+# names exercise pos
+name_exercise_pos = ((width / 2) - 170, 260)
+
+# Size name text fiel
+name_text_field_size = (400, 80)
+
+# Name text field default pos
+name_text_field_pos = (name_exercise_pos[0], name_exercise_pos[1] + (name_exercise_pos[1] / 2) + 80)
+
+# names option size
+name_opt_size = (300, 80)
+
+# names option pos
+name_opt_pos = (name_text_field_pos[0] + (name_text_field_pos[0] / 2) + 85, name_exercise_pos[1]-(name_exercise_size[1] / 2)+10)
 
 # exit button pos
 exit_btn_pos = (width - (exit_btn_size[0] * 2.2), height - 50)
@@ -70,5 +101,14 @@ titles = "resources/images/titles/"
 menus = "resources/images/menus/"
 coditidian_functions = "resources/images/cotidian/function/"
 coditidian_types = "resources/images/cotidian/type/"
+name_items = "resources/images/name/"
+name_names = "resources/images/name/names/"
+name_exercises = "resources/images/name/exercises/"
 fuentes = "resources/fuentes/"
 audios = "resources/audios/"
+
+# Number of cotidian pairs
+COTIDIAN_PAIRS = len(glob(coditidian_functions+'*'+PNG_EXT))
+
+# Number of name pairs
+NAME_PAIRS = len(glob(name_exercises+'*'+PNG_EXT))

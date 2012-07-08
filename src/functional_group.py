@@ -21,7 +21,7 @@ class Functional_Group:
                              LBR: Rect(19, 400, 157 - 19, 573 - 400),
                              RBR: Rect(167, 400, 442 - 167, 573 - 400)
                           }
-        
+        self.load_complete = False
         self.is_complete = False
         self.functions = {}
         self.types = {}
@@ -34,9 +34,9 @@ class Functional_Group:
         
         self.load_functions()
         self.load_types()
-        self.generate_grid()
+        self.generate_table()
            
-    def generate_grid(self):
+    def generate_table(self):
         function = randint(1, COTIDIAN_PAIRS)
         ctype = randint(1, COTIDIAN_PAIRS)
         
@@ -64,7 +64,7 @@ class Functional_Group:
         self.options_types[str(opt_type)] = self.types[str(opt_type)]
         self.options_functions[str(ctype)] = self.functions[str(ctype)]
         self.options_types[str(function)] = self.types[str(function)]
-        
+        self.load_complete = True
         #print "Options function keys: "+str(self.options_functions.keys())
         #print "Options types keys: "+str(self.options_types.keys())
         
@@ -99,13 +99,15 @@ class Functional_Group:
             self.types[str(i)] = option 
             
     def check_complete(self):
-        c_corrects = 0
-        for functions, types in self.options_functions.itervalues(), self.options_types.itervalues():
-            if functions.is_correct: c_corrects += 1
-            if types.is_correct: c_corrects += 1
-            if c_corrects == 2: 
-                self.is_complete = True
-                break
+        if len(self.options_functions) > 0 and len(self.options_types) > 0:
+            c_corrects = 0
+            if self.load_complete:
+                for functions, types in self.options_functions.itervalues(), self.options_types.itervalues():
+                    if functions.is_correct: c_corrects += 1
+                    if types.is_correct: c_corrects += 1
+                    if c_corrects == 2: 
+                        self.is_complete = True
+                        break
             
         return self.is_complete
 
@@ -114,10 +116,10 @@ class Functional_Group:
         screen.blit(self.current_type.img, self.current_type.rect)
         
         for option in self.options_functions.itervalues():
-            screen.blit(option.img, option.rect)
+            option.draw(screen)
             
         for option in self.options_types.itervalues():
-            screen.blit(option.img, option.rect)        
+            option.draw(screen)
         
             
             

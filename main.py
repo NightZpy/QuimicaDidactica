@@ -8,7 +8,6 @@ from sce_main_menu import Sce_Main_Menu
 import pygame
 from config import EXIT, MAIN_MENU_SCENE
 
-
 def main():
     director = Director()
     sce_main_menu = Sce_Main_Menu(director, MAIN_MENU_SCENE)
@@ -24,5 +23,8 @@ def main():
                 
 
 if __name__ == '__main__':
+    #f = open("archivo.txt", "r")
+    #lineas = f.readlines()
+    
     pygame.init()
     main()

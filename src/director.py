@@ -7,16 +7,17 @@
 
 import pygame
 import config
-from config import EXIT, MAIN_MENU_SCENE, WINNER_SCENE, AHORCADO_SCENE,\
-    PAREO_SCENE, NOMBRAR_SCENE, CRUCIGRAMA_SCENE, SOPA_LETRAS_SCENE,\
-    COTIDIAN_FUNCTION_SCENE
+from config import EXIT, MAIN_MENU_SCENE,\
+    MATCH_SCENE, NAME_SCENE, CRUCIGRAMA_SCENE, SOPA_LETRAS_SCENE,\
+    COTIDIAN_FUNCTION_SCENE, HANGMAN_SCENE
 from sce_main_menu import Sce_Main_Menu
 from sce_ahorcado import Sce_Ahorcado
-from sce_pareo import Sce_Pareo
-from sce_nombrar import Sce_Nombrar
+from sce_match import Sce_Match 
+from sce_name import Sce_Name
 from sce_crucigrama import Sce_Crucigrama
 from sce_sopa_letras import Sce_Sopa_Letras
 from sce_functional_group import Sce_Functional_Group
+import time
 
 # ---------------------------------------------------------------------
 # Constantes
@@ -60,14 +61,16 @@ class Director:
             self.scene.on_update()
 
             #Verifico si hay un cambio de scena
-            if self.scene.is_complete: return self.scene.scene_winner
+            if self.scene.is_complete:
+                time.sleep(1) 
+                return self.scene.scene_winner
             
             
             if self.scene.go_scene != EXIT: 
                 if self.scene.go_scene == MAIN_MENU_SCENE: return Sce_Main_Menu(self, MAIN_MENU_SCENE)
-                if self.scene.go_scene == AHORCADO_SCENE: return Sce_Ahorcado(self, AHORCADO_SCENE)
-                if self.scene.go_scene == PAREO_SCENE: return Sce_Pareo(self, PAREO_SCENE)
-                if self.scene.go_scene == NOMBRAR_SCENE: return Sce_Nombrar(self, NOMBRAR_SCENE)
+                if self.scene.go_scene == HANGMAN_SCENE: return Sce_Ahorcado(self, HANGMAN_SCENE)
+                if self.scene.go_scene == MATCH_SCENE: return Sce_Match(self, MATCH_SCENE)
+                if self.scene.go_scene == NAME_SCENE: return Sce_Name(self, NAME_SCENE)
                 if self.scene.go_scene == CRUCIGRAMA_SCENE: return Sce_Crucigrama(self, CRUCIGRAMA_SCENE)
                 if self.scene.go_scene == SOPA_LETRAS_SCENE: return Sce_Sopa_Letras(self, SOPA_LETRAS_SCENE)
                 if self.scene.go_scene == COTIDIAN_FUNCTION_SCENE: return Sce_Functional_Group(self, COTIDIAN_FUNCTION_SCENE)

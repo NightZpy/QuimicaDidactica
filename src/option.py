@@ -40,6 +40,9 @@ class Option(Sprite):
                 if not self.is_correct: 
                     self.move_to_firts_pos()
     
+    def draw(self, screen):
+        screen.blit(self.img, self.rect)
+    
     def resize(self, size): 
         self.img = pygame.transform.scale(self.img, size)
         self.rect = self.img.get_rect()

@@ -28,3 +28,7 @@ def string_to_image(texto, posx, posy, color=(0, 0, 0), tam=15):
     salida_rect.centerx = posx
     salida_rect.centery = posy
     return salida, salida_rect
+
+def resize(img, size): 
+    return pygame.transform.scale(img, size)
+    
