@@ -6,6 +6,7 @@ Created on 06/07/2012
 import pygame
 from graphics import load_image
 from pygame.sprite import Sprite
+from line import Line
 
 class Option(Sprite):   
    
@@ -18,6 +19,9 @@ class Option(Sprite):
         self.is_pressed = False
         self.is_release = False
         self.is_correct = False
+        self.is_mark = False
+        
+        self.line = ''
     
     def pressed(self, mouse_pos):
         if self.rect.collidepoint(mouse_pos): 
@@ -55,6 +59,8 @@ class Option(Sprite):
         self.rect.left = x
         self.rect.top = y
         self.init_pos = self.rect.topleft
+        point_init = self.rect.midright
+        self.line = Line(point_init)
         
     def move_to_firts_pos(self):
         self.rect.left = self.init_pos[0]

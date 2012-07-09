@@ -11,7 +11,7 @@ from config import EXIT, MAIN_MENU_SCENE,\
     MATCH_SCENE, NAME_SCENE, CRUCIGRAMA_SCENE, SOPA_LETRAS_SCENE,\
     COTIDIAN_FUNCTION_SCENE, HANGMAN_SCENE
 from sce_main_menu import Sce_Main_Menu
-from sce_ahorcado import Sce_Ahorcado
+from sce_hangman import Sce_Hangman
 from sce_match import Sce_Match 
 from sce_name import Sce_Name
 from sce_crucigrama import Sce_Crucigrama
@@ -68,7 +68,7 @@ class Director:
             
             if self.scene.go_scene != EXIT: 
                 if self.scene.go_scene == MAIN_MENU_SCENE: return Sce_Main_Menu(self, MAIN_MENU_SCENE)
-                if self.scene.go_scene == HANGMAN_SCENE: return Sce_Ahorcado(self, HANGMAN_SCENE)
+                if self.scene.go_scene == HANGMAN_SCENE: return Sce_Hangman(self, HANGMAN_SCENE)
                 if self.scene.go_scene == MATCH_SCENE: return Sce_Match(self, MATCH_SCENE)
                 if self.scene.go_scene == NAME_SCENE: return Sce_Name(self, NAME_SCENE)
                 if self.scene.go_scene == CRUCIGRAMA_SCENE: return Sce_Crucigrama(self, CRUCIGRAMA_SCENE)

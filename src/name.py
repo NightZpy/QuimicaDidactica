@@ -3,9 +3,7 @@ Created on 06/07/2012
 
 @author: nightzpy
 '''
-from config import COTIDIAN_PAIRS, LTR, RTR, LBR, RBR, PNG_EXT, TEXT_FIELD,\
-    NAME_PAIRS, NUMBER_NAME_OPTIONS
-from pygame.rect import Rect
+from config import PNG_EXT, TEXT_FIELD, NAME_PAIRS, NUMBER_NAME_OPTIONS
 from random import randint
 import config
 from option import Option
@@ -22,32 +20,32 @@ class Name:
         self.text_field_rect.center = config.name_text_field_pos
         
         self.is_complete = False
-        self.exercises = {}
-        self.names = {}
+        self.functions = {}
+        self.elements = {}
         self.current_exercise = {}
         self.current_exercise_key = ''
         self.options_names = {}
         
-        self.load_names()
-        self.load_exercises()
+        self.load_elements()
+        self.load_functions()
         self.generate_table()
            
     def generate_table(self):
         exercise = randint(1, NAME_PAIRS)        
         
         self.current_exercise_key = str(exercise)
-        self.current_exercise = self.exercises[self.current_exercise_key]
+        self.current_exercise = self.functions[self.current_exercise_key]
         self.current_exercise.rect.center = config.name_exercise_pos     
         
         print "Exercise: "+str(exercise)
-        self.options_names[str(exercise)] = self.names[str(exercise)]
+        self.options_names[str(exercise)] = self.elements[str(exercise)]
         
         
         for i in range(1, NUMBER_NAME_OPTIONS + 1):
             name = exercise
             while name == exercise:
                 name = randint(1, NAME_PAIRS)                
-            self.options_names[str(name)] = self.names[str(name)]
+            self.options_names[str(name)] = self.elements[str(name)]
             
         x = config.name_opt_pos[0]
         previous = ''
@@ -85,15 +83,15 @@ class Name:
                 self.options_names[str(current_opt)].firts_pos((x, y)) 
         '''
         
-    def load_exercises(self):
+    def load_functions(self):
         for i in range(1, NAME_PAIRS+1):
             option = Option(config.name_exercises+str(i)+PNG_EXT, config.name_exercise_size)
-            self.exercises[str(i)] = option   
+            self.functions[str(i)] = option   
 
-    def load_names(self):
+    def load_elements(self):
         for i in range(1, NAME_PAIRS+1):
             option = Option(config.name_names+str(i)+PNG_EXT, config.name_opt_size)
-            self.names[str(i)] = option 
+            self.elements[str(i)] = option 
             
     def check_complete(self):
         if len(self.options_names) > 0: 

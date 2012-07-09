@@ -12,9 +12,14 @@ STARTING = 1
 NEXT_SCENE = 2
 PAUSE = 3
 
+# Color constant
+WHITE = (255, 255, 255)
+BLACK = (000, 000, 000)
+
+
 #Scenes constant
 MAIN_MENU_SCENE = 'main_menu'
-HANGMAN_SCENE = 'main_ahorcado'
+HANGMAN_SCENE = 'main_hangman'
 MATCH_SCENE = 'main_match'
 NAME_SCENE = 'main_name'
 CRUCIGRAMA_SCENE = 'main_crucigrama'
@@ -89,6 +94,18 @@ name_opt_size = (300, 80)
 # names option pos
 name_opt_pos = (name_text_field_pos[0] + (name_text_field_pos[0] / 2) + 85, name_exercise_pos[1]-(name_exercise_size[1] / 2)+10)
 
+# match function size
+match_function_size = (200, 65)
+
+# match function size
+match_element_size = (200, 65)
+
+# match function size
+match_function_pos = (50, 90)
+
+# match element pos
+match_element_pos = (width - 250, 90)
+
 # exit button pos
 exit_btn_pos = (width - (exit_btn_size[0] * 2.2), height - 50)
 main_menu_btn_pos = ((exit_btn_pos[0] + exit_btn_size[0] + 20), exit_btn_pos[1])
@@ -104,6 +121,9 @@ coditidian_types = "resources/images/cotidian/type/"
 name_items = "resources/images/name/"
 name_names = "resources/images/name/names/"
 name_exercises = "resources/images/name/exercises/"
+match_functions = "resources/images/matching/function/"
+match_elements = "resources/images/matching/element/"
+hangman = "resources/images/hangman/"
 fuentes = "resources/fuentes/"
 audios = "resources/audios/"
 
@@ -112,3 +132,6 @@ COTIDIAN_PAIRS = len(glob(coditidian_functions+'*'+PNG_EXT))
 
 # Number of name pairs
 NAME_PAIRS = len(glob(name_exercises+'*'+PNG_EXT))
+
+# Number of match pairs
+MATCH_PAIRS = len(glob(match_functions+'*'+PNG_EXT))
