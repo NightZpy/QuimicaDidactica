@@ -20,14 +20,14 @@ def load_image(filename, transparent=False, pixel=(0,0)):
             image = image.convert_alpha()
     return image
 
-def string_to_image(texto, posx, posy, color=(0, 0, 0), tam=15):
+def string_to_image(text, (x, y), color=(0, 0, 0), size=15):
     "Convierte un texto a una imagen que será dibujada."
-    fuente = pygame.font.Font(config.fuentes + "DroidSans.ttf", tam)
-    salida = pygame.font.Font.render(fuente, texto, 1, color)
-    salida_rect = salida.get_rect()
-    salida_rect.centerx = posx
-    salida_rect.centery = posy
-    return salida, salida_rect
+    font = pygame.font.Font(config.fonts + "DroidSans.ttf", size)
+    out = pygame.font.Font.render(font, text, 1, color)
+    rect = out.get_rect()
+    #rect.center = (x, y)
+    rect.center = (x, y)
+    return out, rect
 
 def resize(img, size): 
     return pygame.transform.scale(img, size)

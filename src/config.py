@@ -106,8 +106,23 @@ match_function_pos = (50, 90)
 # match element pos
 match_element_pos = (width - 250, 90)
 
+# hangman text field pos
+hangman_text_field_pos = (width / 2, 50)
+
+# Size hangman text fiel
+hangman_text_field_size = (600, 100)
+
+# hangman text exposed pos
+hangman_text_exposed_pos = ((hangman_text_field_pos[0] - (hangman_text_field_size[0] / 2)) + 35, hangman_text_field_pos[1] - 12)
+
+# hangman text msg pos
+hangman_text_msg_pos = (width / 2, height - 200)
+
+# hangman track msg pos
+hangman_track_msg_pos = (width / 2, height - 225)
+
 # exit button pos
-exit_btn_pos = (width - (exit_btn_size[0] * 2.2), height - 50)
+exit_btn_pos = (width - (exit_btn_size[0] * 2.2), height - 30)
 main_menu_btn_pos = ((exit_btn_pos[0] + exit_btn_size[0] + 20), exit_btn_pos[1])
 
 # Directories
@@ -124,7 +139,7 @@ name_exercises = "resources/images/name/exercises/"
 match_functions = "resources/images/matching/function/"
 match_elements = "resources/images/matching/element/"
 hangman = "resources/images/hangman/"
-fuentes = "resources/fuentes/"
+fonts = "resources/fonts/"
 audios = "resources/audios/"
 
 # Number of cotidian pairs

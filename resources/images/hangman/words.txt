@@ -1,16 +1,16 @@
-Un átomo o un conjunto de átomos que forman parte de una molécula más grande; y que le confiere un comportamiento químico característico
+Un atomo o un conjunto de atomos que forman parte de una molecula mas grande; y que le confiere un comportamiento quimico caracteristico
 Grupos funcionales
-Hidrocarburos de cadenas abiertas, ya sea sencillas o ramificadas, de carbono e hidrógeno.
+Hidrocarburos de cadenas abiertas, ya sea sencillas o ramificadas, de carbono e hidrogeno.
 Alcanos
 Se caracterizan por presentar al menos un enlace triple Carbono-Carbono
 Alquino
 Se caracterizan por la presencia del grupo funcional hidroxilo
 Alcohol
-Compuestos que tienen un grupo hidroxilo unido directamente a un anillo aromático
+Compuestos que tienen un grupo hidroxilo unido directamente a un anillo aromatico
 Fenoles
-Se forman por condensación de dos alcoholes con pérdida de agua
-Éteres
-intermediario importante en la preparación de compuestos farmacéuticos
+Se forman por condensacion de dos alcoholes con perdida de agua
+eteres
+intermediario importante en la preparacion de compuestos farmaceuticos
 Benzaldehido
-Se puede considerar como uno de los ácidos más abundantes en la naturaleza, se encuentra en frutas del genero citrus.
-Ácido cítrico
+Se puede considerar como uno de los acidos mas abundantes en la naturaleza, se encuentra en frutas del genero citrus.
+acido citrico

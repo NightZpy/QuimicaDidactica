@@ -52,7 +52,7 @@ class Director:
             self.time = self.time_keeper.tick(60)
             #Eventos de salida
             for event in pygame.event.get():
-                if event.type == pygame.QUIT or (event.type == pygame.KEYDOWN and event.type == pygame.KEYDOWN): return EXIT
+                if event.type == pygame.QUIT or (event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE): return EXIT
                 
                 #Detecta los eventos
                 self.scene.on_event(event)
@@ -62,6 +62,7 @@ class Director:
 
             #Verifico si hay un cambio de scena
             if self.scene.is_complete:
+                print "Complete: "+str(self.scene.is_complete)
                 time.sleep(1) 
                 return self.scene.scene_winner
             
