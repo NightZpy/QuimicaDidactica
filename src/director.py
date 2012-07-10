@@ -7,17 +7,19 @@
 
 import pygame
 import config
-from config import EXIT, MAIN_MENU_SCENE,\
-    MATCH_SCENE, NAME_SCENE, CRUCIGRAMA_SCENE, SOPA_LETRAS_SCENE,\
-    COTIDIAN_FUNCTION_SCENE, HANGMAN_SCENE
+from config import MAIN_MENU_SCENE,\
+    MATCH_SCENE, NAME_SCENE, CRUCIGRAMA_SCENE, ALPHABET_SOUP_SCENE,\
+    COTIDIAN_FUNCTION_SCENE, HANGMAN_SCENE, DEFINITIONS_SCENE, EXIT, MAIN_SCENE
 from sce_main_menu import Sce_Main_Menu
 from sce_hangman import Sce_Hangman
 from sce_match import Sce_Match 
 from sce_name import Sce_Name
 from sce_crucigrama import Sce_Crucigrama
-from sce_sopa_letras import Sce_Sopa_Letras
 from sce_functional_group import Sce_Functional_Group
 import time
+from sce_definitions import Sce_Definitions
+from sce_alphabet_soup import Sce_Alphabet_Soup
+from sce_main import Sce_Main
 
 # ---------------------------------------------------------------------
 # Constantes
@@ -41,7 +43,6 @@ class Director:
     def __init__(self):
         self.screen = pygame.display.set_mode((config.width, config.height))
         pygame.display.set_caption(config.NAME)
-        print "Screen: "+str(self.screen)
         self.scene = None
         self.go_away = False
         self.time_keeper = pygame.time.Clock()
@@ -62,10 +63,16 @@ class Director:
 
             #Verifico si hay un cambio de scena
             if self.scene.is_complete:
-                print "Complete: "+str(self.scene.is_complete)
                 time.sleep(1) 
                 return self.scene.scene_winner
             
+            #verifico si estoy en modo paginas
+            if self.scene.pages:
+                return self.scene.page
+                 
+            if self.scene.is_move:
+                self.scene.is_move = True
+                return self.scene.page                
             
             if self.scene.go_scene != EXIT: 
                 if self.scene.go_scene == MAIN_MENU_SCENE: return Sce_Main_Menu(self, MAIN_MENU_SCENE)
@@ -73,8 +80,10 @@ class Director:
                 if self.scene.go_scene == MATCH_SCENE: return Sce_Match(self, MATCH_SCENE)
                 if self.scene.go_scene == NAME_SCENE: return Sce_Name(self, NAME_SCENE)
                 if self.scene.go_scene == CRUCIGRAMA_SCENE: return Sce_Crucigrama(self, CRUCIGRAMA_SCENE)
-                if self.scene.go_scene == SOPA_LETRAS_SCENE: return Sce_Sopa_Letras(self, SOPA_LETRAS_SCENE)
+                if self.scene.go_scene == ALPHABET_SOUP_SCENE: return Sce_Alphabet_Soup(self, ALPHABET_SOUP_SCENE)
                 if self.scene.go_scene == COTIDIAN_FUNCTION_SCENE: return Sce_Functional_Group(self, COTIDIAN_FUNCTION_SCENE)
+                if self.scene.go_scene == DEFINITIONS_SCENE: return Sce_Definitions(self, DEFINITIONS_SCENE)
+                if self.scene.go_scene == MAIN_SCENE: return Sce_Main(self, MAIN_SCENE)
                 
             else: return self.scene.go_scene
             
@@ -86,7 +95,7 @@ class Director:
         "Altera la scene actual."
         self.scene = escena
 
-    def exit(self):
+    def will_go_away(self):
         self.go_away = True
 
 # ---------------------------------------------------------------------

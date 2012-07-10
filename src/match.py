@@ -3,12 +3,12 @@ Created on 06/07/2012
 
 @author: nightzpy
 '''
-from config import PNG_EXT, TEXT_FIELD, MATCH_PAIRS
+from config import PNG_EXT, TEXT_FIELD, MATCH_PAIRS, WHITE
 from random import randint
 import config
 from option import Option
 from graphics import load_image, resize
-
+        
 class Match:
     '''
     classdocs
@@ -22,10 +22,8 @@ class Match:
         self.is_complete = False
         self.functions = {}
         self.elements = {}
-        
         self.load_elements()
         self.load_functions()
-        print "Elements keys: "+str(self.elements.keys())
         self.generate_table()
            
     def generate_table(self):
@@ -54,7 +52,7 @@ class Match:
                 function.firts_pos(config.match_function_pos)
                 first = False
             else:
-                y_function = previous.rect.bottom + 10
+                y_function = previous.rect.bottom + 5
                 function.firts_pos((x_function, y_function))                
             previous = function
          
@@ -65,7 +63,7 @@ class Match:
                 element.firts_pos(config.match_element_pos)
                 first = False
             else:
-                y_element = previous.rect.bottom + 10
+                y_element = previous.rect.bottom + 5
                 element.firts_pos((x_element, y_element))                
             previous = element          
         
@@ -90,7 +88,7 @@ class Match:
             
         return self.is_complete
 
-    def draw(self, screen):
+    def draw(self, screen):        
         for function in self.functions.itervalues():
             function.draw(screen)   
             

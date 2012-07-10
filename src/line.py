@@ -1,9 +1,8 @@
 '''
-Created on 08/07/2012
+Created on 10/07/2012
 
 @author: nightzpy
 '''
-import pygame
 from config import WHITE
 
 class Line:

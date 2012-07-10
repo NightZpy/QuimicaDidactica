@@ -37,7 +37,7 @@ class Name:
         self.current_exercise = self.functions[self.current_exercise_key]
         self.current_exercise.rect.center = config.name_exercise_pos     
         
-        print "Exercise: "+str(exercise)
+        #print "Exercise: "+str(exercise)
         self.options_names[str(exercise)] = self.elements[str(exercise)]
         
         
@@ -56,32 +56,10 @@ class Name:
                 first = True
                 previous = option
             else:
-                y = previous.rect.bottom + 10  
+                y = previous.rect.centery + 20  
                 option.firts_pos((x, y))
                 previous = option         
         
-        
-        '''
-        print "Names: "+str(self.options_names.keys())
-        all_opt = []   
-        x = config.name_opt_pos[0]
-        for i in range(1, NUMBER_NAME_OPTIONS + 1):
-            current_opt = str(randint(1, NAME_PAIRS))
-            
-            print "Current: "+current_opt             
-            while self.options_names.has_key(current_opt) == False: 
-                #print "antes bucles"
-                current_opt = randint(1, NAME_PAIRS)
-            print "Names has key: "+str(self.options_names.has_key(current_opt))
-            
-            all_opt.append(current_opt)
-            if i == 1:                 
-                self.options_names[current_opt].firts_pos(config.name_opt_pos)
-            else:
-                last = len(all_opt) - 1
-                y = self.options_names[str(all_opt[last])].rect.bottom + 10  
-                self.options_names[str(current_opt)].firts_pos((x, y)) 
-        '''
         
     def load_functions(self):
         for i in range(1, NAME_PAIRS+1):

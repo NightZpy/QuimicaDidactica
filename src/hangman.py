@@ -148,7 +148,7 @@ class Hangman:
                     
     def draw_you_lose(self, screen):            
         if self.lose: 
-            text = string_to_image('Perdiste. La palabra era: '+self.word, config.hangman_text_msg_pos, WHITE, 30)
+            text = string_to_image('Perdiste. La palabra era: '+self.word, config.hangman_text_msg_pos, BLACK, 30)
             screen.blit(text[0], text[1]) 
             
     def draw_track(self, screen):
@@ -156,7 +156,7 @@ class Hangman:
             first = True
             y = 0
             for text in self.track:
-                text = string_to_image(text, config.hangman_track_msg_pos, WHITE, 25)
+                text = string_to_image(text, config.hangman_track_msg_pos, BLACK, 25)
                 if first:                     
                     y = text[1].centery
                     first = False

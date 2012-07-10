@@ -40,17 +40,15 @@ class Functional_Group:
         function = randint(1, COTIDIAN_PAIRS)
         ctype = randint(1, COTIDIAN_PAIRS)
         
+        print "Rando: "+str((function, ctype))
+        
         self.current_function_key = str(function)
         self.current_function = self.functions[str(function)]
-        self.current_function.rect.centerx = self.rect_grid[LTR].centerx
-        self.current_function.rect.centery = self.rect_grid[LTR].centery        
-        #print "Current function key: "+self.current_function_key
+        self.current_function.rect.center = self.rect_grid[LTR].center       
         
         self.current_type_key = str(ctype)
         self.current_type = self.types[str(ctype)]
-        self.current_type.rect.centerx = self.rect_grid[RBR].centerx
-        self.current_type.rect.centery = self.rect_grid[RBR].centery        
-        #print "Current type key: "+self.current_type_key
+        self.current_type.rect.center = self.rect_grid[RBR].center     
         
         opt_function = function
         while opt_function == function:
@@ -65,50 +63,48 @@ class Functional_Group:
         self.options_functions[str(ctype)] = self.functions[str(ctype)]
         self.options_types[str(function)] = self.types[str(function)]
         self.load_complete = True
-        #print "Options function keys: "+str(self.options_functions.keys())
-        #print "Options types keys: "+str(self.options_types.keys())
         
         for key, option in self.options_functions.iteritems():
-            option.resize(config.c_opt_size)
             self.options_functions[key] = option
             
         for key, option in self.options_types.iteritems():
-            option.resize(config.c_opt_size)
             self.options_types[key] = option        
         
         self.options_functions[str(opt_function)].firts_pos(config.c_opt_pos)
         
         x = config.c_opt_pos[0]
-        y = self.options_functions[str(opt_function)].rect.bottom + 10
+        y = self.options_functions[str(opt_function)].rect.bottom
         self.options_types[str(opt_type)].firts_pos((x, y))
         
-        y = self.options_types[str(opt_type)].rect.bottom + 10
+        y = self.options_types[str(opt_type)].rect.bottom
         self.options_functions[str(ctype)].firts_pos((x, y))
         
-        y = self.options_functions[str(ctype)].rect.bottom + 10
+        y = self.options_functions[str(ctype)].rect.bottom
         self.options_types[str(function)].firts_pos((x, y))                  
         
     def load_functions(self):
         for i in range(1, COTIDIAN_PAIRS+1):
-            option = Option(config.coditidian_functions+str(i)+PNG_EXT, self.rect_grid[LTR].size)
+            option = Option(config.coditidian_functions+str(i)+PNG_EXT)
             self.functions[str(i)] = option   
 
     def load_types(self):
         for i in range(1, COTIDIAN_PAIRS+1):
-            option = Option(config.coditidian_types+str(i)+PNG_EXT, self.rect_grid[RTR].size)
+            option = Option(config.coditidian_types+str(i)+PNG_EXT)
             self.types[str(i)] = option 
             
     def check_complete(self):
         if len(self.options_functions) > 0 and len(self.options_types) > 0:
             c_corrects = 0
             if self.load_complete:
-                for functions, types in self.options_functions.itervalues(), self.options_types.itervalues():
+                for functions in self.options_functions.itervalues():
                     if functions.is_correct: c_corrects += 1
+                
+                for types in self.options_types.itervalues():
                     if types.is_correct: c_corrects += 1
-                    if c_corrects == 2: 
-                        self.is_complete = True
-                        break
-            
+                    
+            if c_corrects == 2: 
+                self.is_complete = True
+                            
         return self.is_complete
 
     def draw(self, screen):

@@ -37,6 +37,7 @@ class Buttom(Sprite):
         self.state_rect = self.release_rect
         
         self.is_visible = visible
+        self.is_active = True
     
     def set_size(self, size):
         self.pressed_img = pygame.transform.scale(self.pressed_img, size)
@@ -47,19 +48,23 @@ class Buttom(Sprite):
     def pressed(self, (x, y)):
         if (not self.is_pressed) and self.pressed_rect.collidepoint(x, y): 
             self.is_pressed = True
-            print "Pressed in pos: "+str((x, y))
         else: 
             self.is_pressed = False
-        
+    
+    def move_at(self, x=False, y=False):
+        if x:
+            self.release_rect.centerx += x
+            self.pressed_rect.centerx += x
+        if y:
+            self.release_rect.centery += y
+            self.pressed_rect.centery += y
+            
     def mouse_over(self, (x, y)): 
         if (not self.is_pressed) and self.pressed_rect.collidepoint(x, y): self.is_over = True
         else: self.is_over = False
     
     def updater(self):
         if self.is_pressed: 
-            #self.beep.play()
-            #time.sleep(1)
-            #self.beep.stop()
             self.state = self.pressed_img
             self.state_rect = self.pressed_rect
         elif self.is_over:

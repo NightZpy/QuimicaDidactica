@@ -5,7 +5,7 @@
 from glob import glob
 
 # Nombre
-NAME = "Química Didáctica"
+NAME = "Jugando con los Grupos Funcionales Por: Rosa Duque & Lenny Contreras"
 EXIT = -1
 GAME_OVER = 0
 STARTING = 1
@@ -19,13 +19,14 @@ BLACK = (000, 000, 000)
 
 #Scenes constant
 MAIN_MENU_SCENE = 'main_menu'
+MAIN_SCENE = 'main'
 HANGMAN_SCENE = 'main_hangman'
 MATCH_SCENE = 'main_match'
 NAME_SCENE = 'main_name'
 CRUCIGRAMA_SCENE = 'main_crucigrama'
-SOPA_LETRAS_SCENE = 'main_sopa'
+ALPHABET_SOUP_SCENE = 'main_alphabet_soup'
 COTIDIAN_FUNCTION_SCENE = 'main_cotidian_function'
-DEFINITIONS_SCENE = 'main_definition'
+DEFINITIONS_SCENE = 'main_definitions'
 WINNER_SCENE = 'winner'
 
 # Rect dict constant for grid in cotidian function game
@@ -33,6 +34,11 @@ LTR = 'left_top_rect'
 RTR = 'right_top_rect'
 LBR = 'left_bottom_rect'
 RBR = 'right_bottom_rect'
+
+# page buttoms
+NEXT_BTN = 'next'
+PREV_BTN = 'previous'
+GO_SCHEME = 'go_scheme'
 
 # Items
 TEXT_FIELD = 'text_field'
@@ -55,7 +61,7 @@ width = 800
 height = 600
 
 # main menu button size
-b_size = (270, 140)
+b_size = (270, 100)
 
 # title correct size 
 correct_title_size = (300, 130)
@@ -71,28 +77,28 @@ main_menu_btn_size = (120, 60)
 exit_btn_size = (120, 60)
 
 # cotidian option size
-c_opt_size = (160, 80)
+c_opt_size = (250, 105)
 
 #init pos for cotidian options
 c_opt_pos = (515, 130)
 
 # names exercise size
-name_exercise_size = (300, 300)
+name_exercise_size = (400, 260)
 
 # names exercise pos
-name_exercise_pos = ((width / 2) - 170, 260)
+name_exercise_pos = ((width / 2) - 140, 260)
 
 # Size name text fiel
-name_text_field_size = (400, 80)
+name_text_field_size = (500, 100)
 
 # Name text field default pos
-name_text_field_pos = (name_exercise_pos[0], name_exercise_pos[1] + (name_exercise_pos[1] / 2) + 80)
+name_text_field_pos = (name_exercise_pos[0]+50, name_exercise_pos[1] + (name_exercise_pos[1] / 2) + 80)
 
 # names option size
-name_opt_size = (300, 80)
+name_opt_size = (300, 25)
 
 # names option pos
-name_opt_pos = (name_text_field_pos[0] + (name_text_field_pos[0] / 2) + 85, name_exercise_pos[1]-(name_exercise_size[1] / 2)+10)
+name_opt_pos = (name_text_field_pos[0] + (name_text_field_pos[0] / 2) + 20, name_exercise_pos[1]-(name_exercise_size[1] / 2)+10)
 
 # match function size
 match_function_size = (200, 65)
@@ -107,19 +113,37 @@ match_function_pos = (50, 90)
 match_element_pos = (width - 250, 90)
 
 # hangman text field pos
-hangman_text_field_pos = (width / 2, 50)
+hangman_text_field_pos = (width / 2, 113)
 
 # Size hangman text fiel
-hangman_text_field_size = (600, 100)
+hangman_text_field_size = (600, 60)
 
 # hangman text exposed pos
-hangman_text_exposed_pos = ((hangman_text_field_pos[0] - (hangman_text_field_size[0] / 2)) + 35, hangman_text_field_pos[1] - 12)
+hangman_text_exposed_pos = ((hangman_text_field_pos[0] - (hangman_text_field_size[0] / 2)) + 35, hangman_text_field_pos[1]-11)
 
 # hangman text msg pos
 hangman_text_msg_pos = (width / 2, height - 200)
 
 # hangman track msg pos
-hangman_track_msg_pos = (width / 2, height - 225)
+hangman_track_msg_pos = (width / 2, height - 200)
+
+# pages buttoms size:
+page_btn_size = (200, 60)
+
+page_btn_next_pos = ((width / 2) + 170, (height-20))
+
+page_btn_prev_pos = ((width / 2) - 170, (height-20))
+
+page_btn_go_scheme_pos = ((width / 2), (height-20))
+
+# Crucigrama button size
+crux_b_size = (14, 25)
+
+# Failed img size
+failed_size = (400, 200)
+
+# Failed img pos
+failed_pos = (width / 2, height / 2)
 
 # exit button pos
 exit_btn_pos = (width - (exit_btn_size[0] * 2.2), height - 30)
@@ -139,6 +163,10 @@ name_exercises = "resources/images/name/exercises/"
 match_functions = "resources/images/matching/function/"
 match_elements = "resources/images/matching/element/"
 hangman = "resources/images/hangman/"
+definition_pages = "resources/images/definitions/"
+crux_words_imgs = "resources/images/crucigrama/"
+alphabet_soup = "resources/images/alphabet_soup/in_soup/"
+alphabet_soup_list = "resources/images/alphabet_soup/word_list/"
 fonts = "resources/fonts/"
 audios = "resources/audios/"
 

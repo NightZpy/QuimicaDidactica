@@ -10,11 +10,16 @@ from line import Line
 
 class Option(Sprite):   
    
-    def __init__(self, path, size):
-        self.img = load_image(path, True)
-        self.img = pygame.transform.scale(self.img, (size[0] - 20, size[1] - 20))
+    def __init__(self, path = False, size = False):
+        if path:
+            self.img = load_image(path, True)
+            #self.img = pygame.transform.scale(self.img, (size[0] - 20, size[1] - 20))
+            self.rect = self.img.get_rect()
+            self.image_exist = True
+        else:
+            self.image_exist = path
         self.init_pos = (0, 0)
-        self.rect = self.img.get_rect()
+        
         
         self.is_pressed = False
         self.is_release = False
@@ -22,6 +27,9 @@ class Option(Sprite):
         self.is_mark = False
         
         self.line = ''
+    
+    def set_rect(self, rect):
+        self.rect = rect
     
     def pressed(self, mouse_pos):
         if self.rect.collidepoint(mouse_pos): 
@@ -45,11 +53,12 @@ class Option(Sprite):
                     self.move_to_firts_pos()
     
     def draw(self, screen):
-        screen.blit(self.img, self.rect)
+        if self.image_exist: screen.blit(self.img, self.rect)
     
-    def resize(self, size): 
-        self.img = pygame.transform.scale(self.img, size)
-        self.rect = self.img.get_rect()
+    def resize(self, size):
+        if self.image_exist: 
+            self.img = pygame.transform.scale(self.img, size)
+            self.rect = self.img.get_rect()
     
     def move(self, (x, y)):
         self.rect.centerx = x

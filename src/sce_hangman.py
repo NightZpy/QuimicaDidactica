@@ -20,7 +20,7 @@ class Sce_Hangman(Scene):
         '''
         Scene.__init__(self, director, background_hangman)        
         self.hangman = Hangman()
-        self.scene_winner =  Sce_Winner(director, background_hangman+END, HANGMAN_SCENE)
+        self.scene_winner =  Sce_Winner(director, 'winner', HANGMAN_SCENE)
         
         for buttom in self.common_buttoms.itervalues():
             buttom.is_visible = True
