@@ -149,13 +149,28 @@ failed_size = (400, 200)
 failed_pos = (width / 2, height / 2)
 
 #alphabet soup chars size
-alphabet_soup_char_size = (20, 20)
+alphabet_soup_char_size = (30, 30)
 
 #alphabet soup space between chars
 alphabet_soup_char_space = (5, 5)
 
 #alphabet soup chars init pos
-alphabet_soup_char_pos = (30, 170)
+alphabet_soup_char_pos = (0, 0)
+
+#alphabet soup words to search pos
+alphabet_soup_word_list_pos = (width - 100, 80)
+
+#alphabet soup words to search size
+alphabet_soup_word_list_size = (150, 35)
+
+#alphabet soup words to search space
+alphabet_soup_word_list_space = (width - 150, 150)
+
+#alphabet soup btn pos
+alphabet_soup_btn_correct_pos = (width - 100, height - 150)
+
+#alphabet soup btn size
+alphabet_soup_btn_correct_size = (180, 90)
 
 # exit button pos
 exit_btn_pos = (width - (exit_btn_size[0] * 2.2), height - 30)
@@ -178,6 +193,7 @@ hangman = "resources/images/hangman/"
 definition_pages = "resources/images/definitions/"
 crux_words_imgs = "resources/images/crucigrama/"
 alphabet_soup_words = "resources/images/alphabet_soup/words/"
+#alphabet_soup_word_list = "resources/images/alphabet_soup/words/"
 alphabet_soup_char_list = "resources/images/alphabet_soup/chars/"
 fonts = "resources/fonts/"
 audios = "resources/audios/"

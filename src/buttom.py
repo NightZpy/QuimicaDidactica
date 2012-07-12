@@ -50,6 +50,8 @@ class Buttom(Sprite):
             self.is_pressed = True
         else: 
             self.is_pressed = False
+        
+        return self.is_pressed
     
     def move_at(self, x=False, y=False):
         if x:

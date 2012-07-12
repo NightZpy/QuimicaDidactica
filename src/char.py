@@ -20,6 +20,8 @@ class Char:
         self.rect = rect
         self.release_img = resize(load_image(config.alphabet_soup_char_list+char+'_release'+PNG_EXT, True), self.rect.size)
         self.pressed_img = resize(load_image(config.alphabet_soup_char_list+char+'_pressed'+PNG_EXT, True), self.rect.size)
+        #self.correct_img = resize(load_image(config.alphabet_soup_char_list+char+'_correct'+PNG_EXT, True), self.rect.size)
+        self.correct_img = self.pressed_img
         
         self.state = self.release_img
         
@@ -27,6 +29,17 @@ class Char:
         self.is_release = False
         self.is_correct = False
         self.is_mark = False
+    
+    def collide_point(self, point):
+        if self.rect.collidepoint(point):
+            self.is_mark = True
+            self.is_pressed = True
+            self.is_release = False
+            return True
+        return False
+        
+    def collide_rect(self, rect):
+        return self.rect.colliderect(rect)
         
     def pressed(self, mouse_pos):
         if self.rect.collidepoint(mouse_pos): 
@@ -34,14 +47,14 @@ class Char:
             self.is_release = False
         
     def release(self):
-        if self.is_pressed:
+        if self.is_pressed or self.is_mark:
             self.is_release = True
-            self.is_pressed = False
+            self.is_pressed = self.is_mark = False
             
     def updater(self):
-        if self.is_pressed: self.state = self.pressed_img
-        elif self.is_over: self.state = self.pressed_img
-        else: self.state = self.release_img           
+        if self.is_pressed or self.is_mark: self.state = self.pressed_img
+        elif self.is_correct: self.state = self.correct_img
+        else: self.state = self.release_img
             
     def draw(self, screen):
         screen.blit(self.state, self.rect)                            

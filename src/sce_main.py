@@ -28,7 +28,7 @@ class Sce_Main(Scene):
 
     def on_event(self, event):
         self.event(event)
-        if event.type == pygame.MOUSEBUTTONUP:
+        if event.type == pygame.MOUSEBUTTONUP or event.type == pygame.KEYDOWN:
             self.event_succes = True
 
     def on_draw(self, screen):

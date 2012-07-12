@@ -6,11 +6,13 @@ Created on 29/06/2012
 from scene import Scene
 import pygame
 from pygame.rect import Rect
-from config import END, ALPHABET_SOUP_SCENE, BLACK, PNG_EXT
+from config import END, ALPHABET_SOUP_SCENE, BLACK, PNG_EXT, EXIT,\
+    MAIN_MENU_SCENE
 from sce_winner import Sce_Winner
 from graphics import load_image
 import config
 from alphabet_soup import Alphabet_Soup
+from buttom import Buttom
 
 WIDTH_WORD = 25
 HEIGTH_WORD = 27
@@ -45,10 +47,14 @@ class Sce_Alphabet_Soup(Scene):
         '''
         Scene.__init__(self, director, background_name)
         self.scene_winner =  Sce_Winner(director, 'winner', ALPHABET_SOUP_SCENE)
+        self.btn_correct = Buttom(config.alphabet_soup_btn_correct_pos, config.alphabet_soup_btn_correct_size, "correct_pressed"+PNG_EXT, "correct_release"+PNG_EXT, True)
         
         for buttom in self.common_buttoms.itervalues():
             buttom.move_at(60)    
             buttom.is_visible = True  
+        
+        self.common_buttoms[MAIN_MENU_SCENE].move_at(15)
+        self.common_buttoms[EXIT].move_at(60)
         
         self.valid_words_img = {}
             
@@ -95,14 +101,34 @@ class Sce_Alphabet_Soup(Scene):
     
     def on_update(self):
         self.time = self.director.time
-        self.update()
+        if not self.is_failed:
+            self.btn_correct.updater()
+            self.update()
+            self.alphabet_soup.update()
+            self.is_complete = self.alphabet_soup.is_complete
                         
-    def on_event(self, event):
-        self.event(event)               
-        
+    def on_event(self, event):        
+        if not self.is_failed:
+            self.event(event)            
+            if event.type == pygame.MOUSEBUTTONUP:
+                mouse_pos = pygame.mouse.get_pos()
+                self.alphabet_soup.check_collide_with_char(mouse_pos) 
+                if self.btn_correct.pressed(mouse_pos):
+                    self.alphabet_soup.check_word()
+                    self.is_failed = self.alphabet_soup.is_failed
+                    self.btn_correct.is_pressed = False
+                      
+            if event.type == pygame.MOUSEMOTION:
+                mouse_pos = pygame.mouse.get_pos()
+                self.btn_correct.mouse_over(mouse_pos)
+            #elif event.type == pygame.KEYUP and event.key == pygame.K_RETURN:                                                        
+        else: 
+            if event.type == pygame.KEYUP and event.key == pygame.K_RETURN: self.is_failed = False
+            
 
     def on_draw(self, screen):
         self.draw(screen)
+        self.btn_correct.draw(screen)
         self.alphabet_soup.draw(screen)
             
         

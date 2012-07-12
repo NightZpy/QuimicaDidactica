@@ -3,10 +3,12 @@ Created on 11/07/2012
 
 @author: nightzpy
 '''
-from random import randint
-from pygame import rect
+from random import randint, randrange
+from pygame.rect import Rect
 import config
 from char import Char
+from graphics import load_image, string_to_image
+from config import WHITE, BLACK
 
 VERT = 1
 HORZ = 2
@@ -17,6 +19,7 @@ INVERSE = 1
 
 MAX_ROWS = 20
 MAX_COLS = 20
+MAX_WORDS = 10
 
 class Alphabet_Soup(object):
     '''
@@ -26,37 +29,153 @@ class Alphabet_Soup(object):
         '''
         Constructor
         '''
+        self.is_failed = False
+        self.is_complete = False        
         self.soup  = []
+        self.soup_chars = []
         self.words_char = {}
-        self.words_chars_rect = {}
+        self.valid_words = {}
+        self.complete_words = []
         self.chars = {}
         
-        self.words = [ 'avion', 'auto', 'persona', 'animal', "caratula", "espejo", "tecnico", "escuela", "barco", "caballo",
-                      "cepillo", "ballena", "tiburon", "estocolmo", "libreta", "sellador", "parabrisas", "comida", "cantimplora"]
+        self.all_words = [] 
+        self.words = []
+        self.words_dict = {}
                 
         self.set_empty_soup()
+        self.load_words_from_file('words.txt')
+        self.load_random_words()
         self.preload_dict_words()        
-        self.add_words_to_soup()
-        self.load_chars()
-        #for word, chars in self.words_chars_rect.iteritems():
-            #print "Word: {0} | Size: {1} - Char Size: {2} | Chars: {3}".format(word, len(word), len(chars[1]), chars)
-            
-                
+        self.add_words_to_soup()         
+        self.load_word_list()                         
         self.load_random_chars()
-        for i in range(MAX_ROWS):
-                print str(self.soup[i])      
+        self.load_chars()     
     
-    def load_chars(self):
-        for word, data in self.words_chars_rect.iteritems():
+    '''def load_chars(self):
+        for word, data in self.valid_words.iteritems():
             chars, rects = data[0], data[1]                        
             for i in range(len(data[0])):
                 char = Char(chars[i], rects[i])
-                self.words_char[word].append(char) 
-            
+                self.words_char[word].append(char)''' 
+    
+    def load_word_list(self):
+        words = []
+        color = BLACK
+        i = 0
+        size = 30
+        heigth = config.alphabet_soup_word_list_size[1]
+        x_init, y_init = config.alphabet_soup_word_list_pos
+        x, y = x_init, y_init
+        for word in self.words:
+            if i>0: y = y_init + (i * heigth)
+            img = string_to_image(word, (x, y), color, size)
+            words.append((word, img))
+            i+=1
+        self.words_dict = dict(words)
+    
+    def load_words_from_file(self, name):
+        f = open(config.alphabet_soup_words+name, "r")
+        self.all_words = f.readlines()
+        for word in range(len(self.all_words)):
+            self.all_words[word] = self.all_words[word].replace('\n', '')
+        f.close()
+    
+    def load_random_words(self):
+        for i in range(MAX_WORDS):
+            word = self.all_words[randrange(len(self.all_words))].upper()
+            while self.words.count(word)>0: word = self.all_words[randrange(len(self.all_words))].upper()
+            self.words.append(word)     
+    
+    def load_chars(self):
+        width, heigth = config.alphabet_soup_char_size                
+        x_init, y_init = config.alphabet_soup_char_pos
+        y = y_init        
+        for row in range(MAX_ROWS):            
+            if row > 0: y = y_init + (heigth * row)
+            x = x_init
+            for col in range(MAX_COLS):
+                if col > 0: x = x_init + (width * col)
+                char = self.soup[row][col]
+                #print "Char: ", char, " - Pos: "+str((x, y))
+                rect = Rect((x, y), (width, heigth))
+                self.soup_chars[row][col] = Char(char, rect)     
+    
+    def check_collide_with_char(self, point):
+        for row in self.soup_chars:
+            for char in row:
+                char.collide_point(point)
+    
+    def check_word(self):
+        chars_marks = self.get_chars_marks()
+        word_mark = ''
+        for char in chars_marks: word_mark += char.char
+        print "Marcada: "+word_mark
+        c_marks = len(chars_marks)
+        c_corrects = 0
+        if c_marks>=min(self.get_list_words_sizes()):
+            for word, data in self.valid_words.iteritems():
+                print "A revisar: ", word
+                c_chars = len(data[0])
+                if c_marks == c_chars:
+                    #print "Revisando..."
+                    for i in range(c_chars):
+                        c = data[0][i]
+                        rect = data[1][i]
+                        print "Comparando: Char->",c," | Rect->",str(rect)                                               
+                        for char in chars_marks:
+                            #print "::::con: Char->",char.char," | Rect->", str(char.rect)
+                            if char.is_mark and char.char == c and char.collide_rect(rect):
+                                print "::::con: Char->",char.char," | Rect->", str(char.rect)
+                                if not char.is_correct: char.is_mark = False
+                                else: char.is_mark = True 
+                                c_corrects += 1
+                                break
+                    #print "Correctas: "+str(c_corrects)
+                    if c_corrects == c_marks:
+                        print "Encontrada: "+word
+                        for char in chars_marks: char.is_correct = True
+                        self.complete_words.append(word)
+                        self.is_complete = len(self.words) <= len(self.complete_words)
+                        self.is_failed = False
+                        return word
+                    c_corrects = 0
+        print "..............No encontrada.................."
+        for char in chars_marks: char.release()
+        self.is_failed = True
+        return False
+    
+    def get_chars_marks(self):
+        marks = []
+        for row in self.soup_chars:
+            for char in row:
+                if char.is_mark: marks.append(char)
+        return marks
+     
+    def get_list_words_sizes(self):
+        if len(self.words) > 0:
+            sizes = []
+            for word in self.words:
+                sizes.append(len(word))
+            return sizes
+        return []
+                
+    def update(self):
+        for row in self.soup_chars: 
+            for char in row: 
+                char.updater()
+           
     def draw(self, screen):
-        for chars in self.words_char.itervalues():
+        '''for chars in self.words_char.itervalues():
             for char in chars:
+                char.draw(screen)'''
+        for row in self.soup_chars:
+            for char in row:
                 char.draw(screen)
+        #print "Word dict size: ", len(self.words_dict)
+        for word, (img, rect) in self.words_dict.iteritems():
+            #print "Drawning: ", word
+            if self.complete_words.count(word) == 0:
+                screen.blit(img, rect)
         
     def create_words_chars_rect(self, word, char, (x , y)):
         if x==0 and y==0:            
@@ -68,8 +187,8 @@ class Alphabet_Soup(object):
         elif x!=0 and y!=0:  
             x, y = config.alphabet_soup_char_pos[0] + ((y) * config.alphabet_soup_char_size[0]), config.alphabet_soup_char_pos[1] + ((x) * config.alphabet_soup_char_size[1])
         #print "Word: ",word,"Char: ",char,"Pos en: ", (x, y) 
-        self.words_chars_rect[word][0].append(char)
-        self.words_chars_rect[word][1].append(rect.Rect((x, y), (config.alphabet_soup_char_size)))
+        self.valid_words[word][0].append(char)
+        self.valid_words[word][1].append(Rect((x, y), (config.alphabet_soup_char_size)))
      
     def preload_dict_words(self):
         words = []
@@ -77,15 +196,16 @@ class Alphabet_Soup(object):
         for word in self.words:
             words2.append((word, []))
             words.append((word, ([], [])))
-        self.words_chars_rect = dict(words)
+        self.valid_words = dict(words)
         self.words_char = dict(words2)                            
         
     def set_empty_soup(self):
         for i in range(MAX_ROWS):
-            #row = []
             self.soup.append([])
+            self.soup_chars.append([])
             for j in range(MAX_COLS):
                 self.soup[i].append('')
+                self.soup_chars[i].append('')
 
     def add_words_to_soup(self):
         n_words = len(self.words)
@@ -101,7 +221,7 @@ class Alphabet_Soup(object):
             sense = randint(1, 2)
             direction = randint(1, 4)                
             while not self.load_word(word, sense, direction, (x, y)):
-                self.words_chars_rect[word] = [], []
+                self.valid_words[word] = [], []
                 x , y = randint(0, MAX_ROWS-1), randint(0, MAX_COLS-1)
                 sense = randint(1, 4)
                 direction =randint(1, 2)       
