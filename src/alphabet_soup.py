@@ -7,8 +7,8 @@ from random import randint, randrange
 from pygame.rect import Rect
 import config
 from char import Char
-from graphics import load_image, string_to_image
-from config import WHITE, BLACK
+from graphics import string_to_image
+from config import BLACK
 
 VERT = 1
 HORZ = 2
@@ -81,10 +81,12 @@ class Alphabet_Soup(object):
         f.close()
     
     def load_random_words(self):
-        for i in range(MAX_WORDS):
+        i = 0
+        while i < MAX_WORDS:
             word = self.all_words[randrange(len(self.all_words))].upper()
             while self.words.count(word)>0: word = self.all_words[randrange(len(self.all_words))].upper()
-            self.words.append(word)     
+            self.words.append(word)
+            i += 1     
     
     def load_chars(self):
         width, heigth = config.alphabet_soup_char_size                
@@ -203,14 +205,18 @@ class Alphabet_Soup(object):
         for i in range(MAX_ROWS):
             self.soup.append([])
             self.soup_chars.append([])
-            for j in range(MAX_COLS):
+            j = 0
+            while j < MAX_COLS:
                 self.soup[i].append('')
                 self.soup_chars[i].append('')
+                j += 1
 
     def add_words_to_soup(self):
         n_words = len(self.words)
         words_add = []
-        for i in range(n_words):
+        i = 0
+        while i < n_words:
+            i += 1 
             word = randint(0, n_words-1)
             word = self.words[word]
             while words_add.count(word) > 0:
@@ -225,7 +231,8 @@ class Alphabet_Soup(object):
                 x , y = randint(0, MAX_ROWS-1), randint(0, MAX_COLS-1)
                 sense = randint(1, 4)
                 direction =randint(1, 2)       
-            words_add.append(word)                            
+            words_add.append(word)
+                                       
     
     def load_random_chars(self):
         for x in range(MAX_ROWS):
