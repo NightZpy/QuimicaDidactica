@@ -56,6 +56,9 @@ JPG_EXT = '.jpg'
 END = '_end'
 INIT = '_init'
 
+#String of chars
+chars = 'abcdefghijklmnopqrstuvwxyz'
+
 # Resolution
 width = 800
 height = 600
@@ -145,6 +148,15 @@ failed_size = (400, 200)
 # Failed img pos
 failed_pos = (width / 2, height / 2)
 
+#alphabet soup chars size
+alphabet_soup_char_size = (20, 20)
+
+#alphabet soup space between chars
+alphabet_soup_char_space = (5, 5)
+
+#alphabet soup chars init pos
+alphabet_soup_char_pos = (30, 170)
+
 # exit button pos
 exit_btn_pos = (width - (exit_btn_size[0] * 2.2), height - 30)
 main_menu_btn_pos = ((exit_btn_pos[0] + exit_btn_size[0] + 20), exit_btn_pos[1])
@@ -165,8 +177,8 @@ match_elements = "resources/images/matching/element/"
 hangman = "resources/images/hangman/"
 definition_pages = "resources/images/definitions/"
 crux_words_imgs = "resources/images/crucigrama/"
-alphabet_soup = "resources/images/alphabet_soup/in_soup/"
-alphabet_soup_list = "resources/images/alphabet_soup/word_list/"
+alphabet_soup_words = "resources/images/alphabet_soup/words/"
+alphabet_soup_char_list = "resources/images/alphabet_soup/chars/"
 fonts = "resources/fonts/"
 audios = "resources/audios/"
 
@@ -177,4 +189,11 @@ COTIDIAN_PAIRS = len(glob(coditidian_functions+'*'+PNG_EXT))
 NAME_PAIRS = len(glob(name_exercises+'*'+PNG_EXT))
 
 # Number of match pairs
-MATCH_PAIRS = len(glob(match_functions+'*'+PNG_EXT))
+MATCH_PAIRS = len(glob(match_functions+'*'+PNG_EXT))   
+    
+        
+        
+        
+        
+    
+    
