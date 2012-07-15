@@ -62,7 +62,7 @@ class Alphabet_Soup(object):
         words = []
         color = BLACK
         i = 0
-        size = 30
+        size = 22
         heigth = config.alphabet_soup_word_list_size[1]
         x_init, y_init = config.alphabet_soup_word_list_pos
         x, y = x_init, y_init
@@ -111,37 +111,41 @@ class Alphabet_Soup(object):
         chars_marks = self.get_chars_marks()
         word_mark = ''
         for char in chars_marks: word_mark += char.char
-        print "Marcada: "+word_mark
+        #print "Marcada: "+word_mark
         c_marks = len(chars_marks)
         c_corrects = 0
         if c_marks>=min(self.get_list_words_sizes()):
             for word, data in self.valid_words.iteritems():
-                print "A revisar: ", word
+                #print "A revisar: ", word
                 c_chars = len(data[0])
                 if c_marks == c_chars:
                     #print "Revisando..."
                     for i in range(c_chars):
                         c = data[0][i]
                         rect = data[1][i]
-                        print "Comparando: Char->",c," | Rect->",str(rect)                                               
+                        #print "Comparando: Char->",c," | Rect->",str(rect)                                               
                         for char in chars_marks:
                             #print "::::con: Char->",char.char," | Rect->", str(char.rect)
                             if char.is_mark and char.char == c and char.collide_rect(rect):
-                                print "::::con: Char->",char.char," | Rect->", str(char.rect)
+                                #print "::::con: Char->",char.char," | Rect->", str(char.rect)
                                 if not char.is_correct: char.is_mark = False
                                 else: char.is_mark = True 
                                 c_corrects += 1
                                 break
                     #print "Correctas: "+str(c_corrects)
                     if c_corrects == c_marks:
-                        print "Encontrada: "+word
-                        for char in chars_marks: char.is_correct = True
+                        #print "Encontrada: "+word
+                        for char in chars_marks: 
+                            #print "Char: ", char.char
+                            char.is_mark = False
+                            char.is_pressed = False
+                            char.is_correct = True
                         self.complete_words.append(word)
                         self.is_complete = len(self.words) <= len(self.complete_words)
                         self.is_failed = False
                         return word
                     c_corrects = 0
-        print "..............No encontrada.................."
+        #print "..............No encontrada.................."
         for char in chars_marks: char.release()
         self.is_failed = True
         return False

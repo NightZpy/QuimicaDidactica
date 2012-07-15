@@ -27,27 +27,31 @@ class Sce_Hangman(Scene):
 
     def on_update(self):
         self.time = self.director.time 
-        self.update()
-        
-        if not self.hangman.lose:
-            word = ''
-            self.is_complete = word.join(self.hangman.exposed) == self.hangman.word
-            self.hangman.lose = self.hangman.intent == self.hangman.intents
-        else:
-            self.hangman.paused = True
-                
+        if not self.is_failed:
+            self.update()            
+            if not self.hangman.lose:
+                word = ''
+                self.is_complete = word.join(self.hangman.exposed) == self.hangman.word
+                self.is_failed = self.hangman.lose = self.hangman.intent == self.hangman.intents
+            else:
+                self.hangman.paused = True                
 
-
-    def on_event(self, event):
-        self.event(event)
-        if event.type == pygame.KEYDOWN:            
-            if not self.hangman.paused and ((event.unicode.lower() in ("abcdefghijklmnopqrstuvwxyz")) or (event.key == pygame.K_SPACE and ' ' in self.hangman.word)):
-                key = event.unicode.lower()
-                #print "Tecla: "+key
-                if (key in self.hangman.word.lower()) and (key not in self.hangman.typeds):
-                    self.hangman.put_char(key)
-                else:
-                    self.hangman.intent += 1        
+    def on_event(self, event):        
+        self.event(event) 
+        if not self.is_failed: 
+            if not self.hangman.lose:                      
+                if event.type == pygame.KEYDOWN:            
+                    if not self.hangman.paused and ((event.unicode.lower() in ("abcdefghijklmnopqrstuvwxyz")) or (event.key == pygame.K_SPACE and ' ' in self.hangman.word)):
+                        key = event.unicode.lower()
+                        if (key in self.hangman.word.lower()) and (key not in self.hangman.typeds):
+                            self.hangman.put_char(key)
+                        else:
+                            self.hangman.intent += 1
+            elif event.type == pygame.KEYDOWN and event.key == pygame.K_RETURN:                        
+                self.hangman.intent = 0
+                self.hangman.choose_word()
+                self.hangman.typeds = []
+                self.hangman.lose = False           
                                       
 
     def on_draw(self, screen):

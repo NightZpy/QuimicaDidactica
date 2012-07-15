@@ -64,8 +64,8 @@ class Scene:
             if buttom.is_pressed: self.go_scene = key 
             
     def event(self, event):     
-        #if event.type == pygame.MOUSEBUTTONDOWN:
-        #    print str(pygame.mouse.get_pos())
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            print str(pygame.mouse.get_pos())
         
         if event.type == pygame.MOUSEMOTION:
             mouse_pos = pygame.mouse.get_pos()

@@ -130,5 +130,7 @@ class Sce_Alphabet_Soup(Scene):
         self.draw(screen)
         self.btn_correct.draw(screen)
         self.alphabet_soup.draw(screen)
+        if self.is_failed: screen.blit(self.failed_img, self.failed_rect)
+            
             
         

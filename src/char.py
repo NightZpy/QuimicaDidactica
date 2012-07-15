@@ -18,10 +18,9 @@ class Char:
         '''
         self.char = char
         self.rect = rect
-        self.release_img = resize(load_image(config.alphabet_soup_char_list+char+'_release'+PNG_EXT, True), self.rect.size)
-        self.pressed_img = resize(load_image(config.alphabet_soup_char_list+char+'_pressed'+PNG_EXT, True), self.rect.size)
-        #self.correct_img = resize(load_image(config.alphabet_soup_char_list+char+'_correct'+PNG_EXT, True), self.rect.size)
-        self.correct_img = self.pressed_img
+        self.release_img = load_image(config.alphabet_soup_char_list+char+'_release'+PNG_EXT, True)
+        self.pressed_img = load_image(config.alphabet_soup_char_list+char+'_pressed'+PNG_EXT, True)
+        self.correct_img = load_image(config.alphabet_soup_char_list+char+'_correct'+PNG_EXT, True)
         
         self.state = self.release_img
         
@@ -29,6 +28,8 @@ class Char:
         self.is_release = False
         self.is_correct = False
         self.is_mark = False
+    
+    
     
     def collide_point(self, point):
         if self.rect.collidepoint(point):

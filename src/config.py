@@ -139,8 +139,8 @@ page_btn_prev_pos = ((width / 2) - 170, (height-20))
 
 page_btn_go_scheme_pos = ((width / 2), (height-20))
 
-# Crucigrama button size
-crux_b_size = (14, 25)
+# crossword button size
+cross_b_size = (14, 25)
 
 # Failed img size
 failed_size = (400, 200)
@@ -149,13 +149,13 @@ failed_size = (400, 200)
 failed_pos = (width / 2, height / 2)
 
 #alphabet soup chars size
-alphabet_soup_char_size = (30, 30)
+alphabet_soup_char_size = (24, 24)
 
 #alphabet soup space between chars
 alphabet_soup_char_space = (5, 5)
 
 #alphabet soup chars init pos
-alphabet_soup_char_pos = (0, 0)
+alphabet_soup_char_pos = (50, 80)
 
 #alphabet soup words to search pos
 alphabet_soup_word_list_pos = (width - 100, 80)
@@ -191,7 +191,8 @@ match_functions = "resources/images/matching/function/"
 match_elements = "resources/images/matching/element/"
 hangman = "resources/images/hangman/"
 definition_pages = "resources/images/definitions/"
-crux_words_imgs = "resources/images/crucigrama/"
+cross_words_imgs = "resources/images/crossword/"
+cross_chars_imgs = "resources/images/crossword/chars/"
 alphabet_soup_words = "resources/images/alphabet_soup/words/"
 #alphabet_soup_word_list = "resources/images/alphabet_soup/words/"
 alphabet_soup_char_list = "resources/images/alphabet_soup/chars/"
