@@ -89,7 +89,7 @@ class Crossword:
         
         for c in range(len(word)):
             char = word[c]
-            if i < len(word):
+            if i < len(key):
                 img = self.chars[char]
                 (x_init, y_init), size = (rect.left, rect.top), rect.size
                 if i==0: x, y = x_init, y_init
@@ -101,6 +101,7 @@ class Crossword:
                 i += 1          
     
     def update(self):
+        self.is_complete = len(self.exposed) == len(self.words)
         for buttom in self.buttoms.itervalues():
             buttom.updater()
            
@@ -119,12 +120,16 @@ class Crossword:
     def check_word(self):
         for key, buttom in self.buttoms.iteritems():
             if buttom.is_pressed:
-                if key==self.get_word_typed(): 
+                word = self.get_word_typed()
+                if len(word)>len(key): word = word[0:len(key)] 
+                if key==word: 
                     self.exposed.append(key)
                     buttom.is_active = False
-        self.typeds = []
-        
-        self.is_complete = len(self.exposed) == len(self.words)
+                    return True
+                else:
+                    buttom.is_pressed = False
+        self.typeds = []                
+        return False
                     
     def load_chars(self):
         list_chars = []

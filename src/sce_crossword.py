@@ -50,29 +50,29 @@ class Sce_Crucigrama(Scene):
                     
     def on_event(self, event):
         self.event(event)
-        
-        if event.type == pygame.MOUSEMOTION:                    
-            for buttom in self.crossword.buttoms.itervalues():
-                mouse_pos = pygame.mouse.get_pos()
-                buttom.mouse_over(mouse_pos)
-                
-        if event.type == pygame.MOUSEBUTTONUP:             
-            for buttom in self.crossword.buttoms.itervalues():
-                mouse_pos = pygame.mouse.get_pos()
-                if buttom.is_active: 
-                    buttom.pressed(mouse_pos)
-                    self.crossword.typeds = []  
-        
-        if self.is_typing:
-            if event.type == pygame.KEYDOWN:                        
-                char = event.unicode.lower()
-                if event.unicode.lower() in config.chars:
-                    #print "Key: "+event.unicode.lower()
-                    self.crossword.put_char(char)
-                elif (event.key == pygame.K_RETURN):                    
-                    self.finish_typing = True
-                    self.is_typing = False 
-                    self.crossword.check_word()       
+        if not self.is_failed:
+            if event.type == pygame.MOUSEMOTION:                    
+                for buttom in self.crossword.buttoms.itervalues():
+                    mouse_pos = pygame.mouse.get_pos()
+                    buttom.mouse_over(mouse_pos)
+                    
+            if event.type == pygame.MOUSEBUTTONUP:             
+                for buttom in self.crossword.buttoms.itervalues():
+                    mouse_pos = pygame.mouse.get_pos()
+                    if buttom.is_active: 
+                        buttom.pressed(mouse_pos)
+                        self.crossword.typeds = []  
+            
+            if self.is_typing:
+                if event.type == pygame.KEYDOWN:                        
+                    char = event.unicode.lower()
+                    if event.unicode.lower() in config.chars:
+                        #print "Key: "+event.unicode.lower()
+                        self.crossword.put_char(char)
+                    elif (event.key == pygame.K_RETURN):                    
+                        self.finish_typing = True
+                        self.is_typing = False 
+                        if not self.crossword.check_word(): self.is_failed = True       
                                                             
 
     def on_draw(self, screen):
