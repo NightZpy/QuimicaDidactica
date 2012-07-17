@@ -5,7 +5,7 @@ Created on 11/07/2012
 '''
 import config
 from config import PNG_EXT
-from graphics import load_image, resize
+from graphics import load_image
 
 class Char:
     '''

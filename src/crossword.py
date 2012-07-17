@@ -95,7 +95,7 @@ class Crossword:
                 if i==0: x, y = x_init, y_init
                 else:
                     if key in self.words[0:4]: y = y_init + (rect.height * i) + 1
-                    else: x = x_init + (rect.width * i) + 5                    
+                    else: x = x_init + (rect.width * i) + 1                    
                  
                 screen.blit(img, Rect((x, y), size))
                 i += 1          

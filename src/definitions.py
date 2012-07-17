@@ -3,11 +3,9 @@ Created on 06/07/2012
 
 @author: nightzpy
 '''
-from config import PNG_EXT, TEXT_FIELD, MATCH_PAIRS
-from random import randint
+from config import PNG_EXT, MATCH_PAIRS
 import config
 from option import Option
-from graphics import load_image, resize
 from pygame.rect import Rect
 from page import Page
 from glob import glob

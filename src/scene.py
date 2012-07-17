@@ -33,7 +33,7 @@ class Scene:
             self.background = resize(load_image(config.backgrounds+background_name+SMALL+PNG_EXT), (800, 600))
         else:
             directorie = config.definition_pages+page_number+PNG_EXT
-            print "Directorie: "+directorie
+            #print "Directorie: "+directorie
             self.background = load_image(directorie)
         
         self.failed_rect = rect.Rect((0, 0), (0, 0))                    
@@ -64,8 +64,10 @@ class Scene:
             if buttom.is_pressed: self.go_scene = key 
             
     def event(self, event):     
-        if event.type == pygame.MOUSEBUTTONDOWN:
-            print str(pygame.mouse.get_pos())
+        #=======================================================================
+        # if event.type == pygame.MOUSEBUTTONDOWN:
+        #    print str(pygame.mouse.get_pos())
+        #=======================================================================
         
         if event.type == pygame.MOUSEMOTION:
             mouse_pos = pygame.mouse.get_pos()

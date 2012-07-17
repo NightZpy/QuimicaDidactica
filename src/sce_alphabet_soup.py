@@ -5,11 +5,9 @@ Created on 29/06/2012
 '''
 from scene import Scene
 import pygame
-from pygame.rect import Rect
-from config import END, ALPHABET_SOUP_SCENE, BLACK, PNG_EXT, EXIT,\
+from config import ALPHABET_SOUP_SCENE, PNG_EXT, EXIT,\
     MAIN_MENU_SCENE
 from sce_winner import Sce_Winner
-from graphics import load_image
 import config
 from alphabet_soup import Alphabet_Soup
 from buttom import Buttom

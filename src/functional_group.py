@@ -5,7 +5,7 @@ Created on 06/07/2012
 '''
 from config import COTIDIAN_PAIRS, LTR, RTR, LBR, RBR, PNG_EXT
 from pygame.rect import Rect
-from random import randint
+from random import randint, randrange
 import config
 from option import Option
 
@@ -37,10 +37,15 @@ class Functional_Group:
         self.generate_table()
            
     def generate_table(self):
-        function = randint(1, COTIDIAN_PAIRS)
-        ctype = randint(1, COTIDIAN_PAIRS)
+        function = randrange(1, COTIDIAN_PAIRS)
+        ctype = function
+        while ctype == function:
+            ctype = randrange(1, COTIDIAN_PAIRS)
         
-        print "Rando: "+str((function, ctype))
+        #print "Current function: ",str(function)
+        #print "Current type: ",str(ctype)
+        
+        #print "Rando: "+str((function, ctype))
         
         self.current_function_key = str(function)
         self.current_function = self.functions[str(function)]
@@ -51,24 +56,29 @@ class Functional_Group:
         self.current_type.rect.center = self.rect_grid[RBR].center     
         
         opt_function = function
-        while opt_function == function:
-            opt_function = randint(1, COTIDIAN_PAIRS)
+        while opt_function == function or opt_function == ctype:
+            opt_function = randrange(1, COTIDIAN_PAIRS)
             
         opt_type = ctype
-        while opt_type == ctype:
-            opt_type = randint(1, COTIDIAN_PAIRS)
-        
+        while opt_type == ctype or opt_type == opt_function or opt_type == function:
+            opt_type = randrange(1, COTIDIAN_PAIRS)       
+                        
         self.options_functions[str(opt_function)] = self.functions[str(opt_function)]
         self.options_types[str(opt_type)] = self.types[str(opt_type)]
         self.options_functions[str(ctype)] = self.functions[str(ctype)]
         self.options_types[str(function)] = self.types[str(function)]
         self.load_complete = True
         
-        for key, option in self.options_functions.iteritems():
-            self.options_functions[key] = option
-            
-        for key, option in self.options_types.iteritems():
-            self.options_types[key] = option        
+        #print "Opt function: ",str(self.options_functions.keys())
+        #print "Opt type: ",str(self.options_types.keys())          
+        
+        #=======================================================================
+        # for key, option in self.options_functions.iteritems():
+        #    self.options_functions[key] = option
+        #    
+        # for key, option in self.options_types.iteritems():
+        #    self.options_types[key] = option        
+        #=======================================================================
         
         self.options_functions[str(opt_function)].firts_pos(config.c_opt_pos)
         
@@ -80,17 +90,22 @@ class Functional_Group:
         self.options_functions[str(ctype)].firts_pos((x, y))
         
         y = self.options_functions[str(ctype)].rect.bottom
-        self.options_types[str(function)].firts_pos((x, y))                  
+        self.options_types[str(function)].firts_pos((x, y))   
+        
+        #print "Nro Functions: ", str(len(self.options_functions))
+        #print "Nro Types: ", str(len(self.options_types))               
         
     def load_functions(self):
         for i in range(1, COTIDIAN_PAIRS+1):
             option = Option(config.coditidian_functions+str(i)+PNG_EXT)
-            self.functions[str(i)] = option   
+            self.functions[str(i)] = option 
+        #print "Functions: "+str(self.functions.keys())  
 
     def load_types(self):
         for i in range(1, COTIDIAN_PAIRS+1):
             option = Option(config.coditidian_types+str(i)+PNG_EXT)
-            self.types[str(i)] = option 
+            self.types[str(i)] = option
+        #print "Types: "+str(self.types.keys()) 
             
     def check_complete(self):
         if len(self.options_functions) > 0 and len(self.options_types) > 0:

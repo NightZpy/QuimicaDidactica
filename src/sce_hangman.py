@@ -4,7 +4,7 @@ Created on 29/06/2012
 @author: nightzpy
 '''
 from scene import Scene
-from config import HANGMAN_SCENE, END
+from config import HANGMAN_SCENE
 from sce_winner import Sce_Winner
 from hangman import Hangman
 import pygame
