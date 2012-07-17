@@ -8,7 +8,7 @@ from graphics import load_image
 import config
 import pygame
 from buttom import Buttom
-from config import PNG_EXT, HANGMAN_SCENE, COTIDIAN_FUNCTION_SCENE, NAME_SCENE, MATCH_SCENE, CRUCIGRAMA_SCENE, DEFINITIONS_SCENE,\
+from config import PNG_EXT, HANGMAN_SCENE, COTIDIAN_FUNCTION_SCENE, NAME_SCENE, MATCH_SCENE, CROSSWORD_SCENE, DEFINITIONS_SCENE,\
     ALPHABET_SOUP_SCENE
 
 class Sce_Main_Menu(Scene):
@@ -32,7 +32,7 @@ class Sce_Main_Menu(Scene):
                         COTIDIAN_FUNCTION_SCENE: Buttom((230, 300), config.b_size, "buttom_3_pressed"+PNG_EXT, "buttom_3_release"+PNG_EXT, True),
                         MATCH_SCENE: Buttom((580, 300), config.b_size, "buttom_4_pressed"+PNG_EXT, "buttom_4_release"+PNG_EXT, True),
                         ALPHABET_SOUP_SCENE: Buttom((230, 440), config.b_size, "buttom_5_pressed"+PNG_EXT, "buttom_5_release"+PNG_EXT, True),  
-                        CRUCIGRAMA_SCENE: Buttom((580, 440), config.b_size, "buttom_6_pressed"+PNG_EXT, "buttom_6_release"+PNG_EXT, True),                        
+                        CROSSWORD_SCENE: Buttom((580, 440), config.b_size, "buttom_6_pressed"+PNG_EXT, "buttom_6_release"+PNG_EXT, True),                        
                         HANGMAN_SCENE: Buttom((config.width / 2, 530), config.b_size, "buttom_7_pressed"+PNG_EXT, "buttom_7_release"+PNG_EXT, True)
                         }
     

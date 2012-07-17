@@ -8,13 +8,13 @@
 import pygame
 import config
 from config import MAIN_MENU_SCENE,\
-    MATCH_SCENE, NAME_SCENE, CRUCIGRAMA_SCENE, ALPHABET_SOUP_SCENE,\
+    MATCH_SCENE, NAME_SCENE, CROSSWORD_SCENE, ALPHABET_SOUP_SCENE,\
     COTIDIAN_FUNCTION_SCENE, HANGMAN_SCENE, DEFINITIONS_SCENE, EXIT, MAIN_SCENE
 from sce_main_menu import Sce_Main_Menu
 from sce_hangman import Sce_Hangman
 from sce_match import Sce_Match 
 from sce_name import Sce_Name
-from sce_crucigrama import Sce_Crucigrama
+from sce_crossword import Sce_Crucigrama 
 from sce_functional_group import Sce_Functional_Group
 import time
 from sce_definitions import Sce_Definitions
@@ -79,7 +79,7 @@ class Director:
                 if self.scene.go_scene == HANGMAN_SCENE: return Sce_Hangman(self, HANGMAN_SCENE)
                 if self.scene.go_scene == MATCH_SCENE: return Sce_Match(self, MATCH_SCENE)
                 if self.scene.go_scene == NAME_SCENE: return Sce_Name(self, NAME_SCENE)
-                if self.scene.go_scene == CRUCIGRAMA_SCENE: return Sce_Crucigrama(self, CRUCIGRAMA_SCENE)
+                if self.scene.go_scene == CROSSWORD_SCENE: return Sce_Crucigrama(self, CROSSWORD_SCENE)
                 if self.scene.go_scene == ALPHABET_SOUP_SCENE: return Sce_Alphabet_Soup(self, ALPHABET_SOUP_SCENE)
                 if self.scene.go_scene == COTIDIAN_FUNCTION_SCENE: return Sce_Functional_Group(self, COTIDIAN_FUNCTION_SCENE)
                 if self.scene.go_scene == DEFINITIONS_SCENE: return Sce_Definitions(self, DEFINITIONS_SCENE)
